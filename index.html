@@ -142,23 +142,6 @@
                     </div>
                     <span class="text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
                 </button>
-
-                <!-- NEU: Gesetz-XML Importer & Suche -->
-                <button onclick="openMainTopic('gesetze')"
-                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-2xl shrink-0">
-                            📜
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white group-hover:text-amber-300 transition">
-                                Gesetz-Bibliothek &amp; XML-Importer
-                            </h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Gesetze hochladen &amp; dauerhaft in Supabase speichern</p>
-                        </div>
-                    </div>
-                    <span class="text-slate-500 group-hover:text-amber-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
-                </button>
             </div>
         </main>
 
@@ -171,34 +154,187 @@
                 </button>
                 <span class="text-sm font-extrabold text-blue-300 tracking-tight">RSS &amp; Ausländerrecht</span>
             </div>
-                        <h2 class="font-bold text-lg text-white group-hover:text-indigo-300 transition">
-                            Zollrecht
-                        </h2>
-                    </div>
-                    <span class="text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
-                </button>
 
-                <!-- NEU: Gesetz-XML Importer & Suche -->
-                <button onclick="openMainTopic('gesetze')"
-                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
+            <div class="flex-1 flex flex-col justify-center space-y-4 pb-10">
+                <button onclick="openRssQuizMenu()"
+                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-blue-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-2xl shrink-0">
-                            📜
+                        <div class="w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-2xl shrink-0">
+                            🧠
                         </div>
                         <div>
-                            <h2 class="font-bold text-lg text-white group-hover:text-amber-300 transition">
-                                Gesetz-Bibliothek &amp; XML-Importer
+                            <h2 class="font-bold text-lg text-white group-hover:text-blue-300 transition">
+                                Quiz
                             </h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Gesetze hochladen &amp; dauerhaft in Supabase speichern</p>
+                            <p class="text-xs text-slate-400 mt-0.5">Fragen &amp; Fälle üben</p>
                         </div>
                     </div>
-                    <span class="text-slate-500 group-hover:text-amber-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
+                    <span class="text-slate-500 group-hover:text-blue-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
+                </button>
+
+                <button onclick="openRssOverviewMenu()"
+                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-blue-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-2xl shrink-0">
+                            📚
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-lg text-white group-hover:text-blue-300 transition">
+                                Übersicht
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Lernmaterial &amp; PDFs</p>
+                        </div>
+                    </div>
+                    <span class="text-slate-500 group-hover:text-blue-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
                 </button>
             </div>
-        </main>
+        </section>
 
-        <!-- ==================== ANSICHT 1B: RSS & AUSLÄNDERRECHT MENÜ ==================== -->
-<!-- ... existing code ... -->
+        <!-- ==================== ANSICHT 1C: RSS & AUSLÄNDERRECHT -> QUIZ ==================== -->
+        <section id="view-rss-quiz" class="hidden flex-1 flex flex-col pb-8 animate-view">
+            <div class="flex items-center justify-between mb-4">
+                <button onclick="backToRss()"
+                    class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
+                    ← RSS &amp; Ausländerrecht
+                </button>
+                <span class="text-sm font-extrabold text-blue-300 tracking-tight">RSS · Quiz</span>
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 text-center shadow-lg my-auto">
+                <div class="text-3xl mb-2">🚧</div>
+                <h3 class="font-bold text-sm text-white mb-1">Bald verfügbar</h3>
+                <p class="text-xs text-slate-400">Hier entstehen demzufolge die Quiz-Fragen für RSS &amp; Ausländerrecht.</p>
+            </div>
+        </section>
+
+        <!-- ==================== ANSICHT 1D: RSS & AUSLÄNDERRECHT -> ÜBERSICHT ==================== -->
+        <section id="view-rss-overview" class="hidden flex-1 flex flex-col pb-8 animate-view">
+            <div class="flex items-center justify-between mb-5">
+                <button onclick="backToRss()"
+                    class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
+                    ← RSS &amp; Ausländerrecht
+                </button>
+                <span class="text-sm font-extrabold text-blue-300 tracking-tight">RSS · Übersicht</span>
+            </div>
+
+            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl mb-4">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">PDF Dokumente &amp; Lernmaterial</h3>
+                <div class="flex items-center gap-2">
+                    <input type="file" id="pdf-upload-rss" accept="application/pdf" class="hidden" onchange="handlePdfUpload('rss', this)">
+                    <label for="pdf-upload-rss" class="flex-1 py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs text-center cursor-pointer shadow-md transition active:scale-[0.99]">
+                        📂 PDF hochladen
+                    </label>
+                </div>
+            </div>
+            <div id="pdf-list-rss" class="space-y-2.5"></div>
+        </section>
+
+        <!-- ==================== ANSICHT 2: VOLLZUGSRECHT MENÜ ==================== -->
+        <section id="view-vollzug" class="hidden flex-1 flex flex-col pb-8 animate-view">
+            <div class="flex items-center justify-between mb-6">
+                <button onclick="goHome()"
+                    class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
+                    ← Startseite
+                </button>
+                <span class="text-sm font-extrabold text-emerald-300 tracking-tight">Vollzugsrecht &amp; RDA</span>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-center space-y-4 pb-10">
+                <button onclick="openVollzugQuizMenu()"
+                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-2xl shrink-0">
+                            🧠
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-lg text-white group-hover:text-emerald-300 transition">
+                                Quiz
+                            </h2>
+                            <p id="vollzug-menu-subtitle" class="text-xs text-slate-400 mt-0.5">RDA-Fragen &amp; Paragrafenketten üben</p>
+                        </div>
+                    </div>
+                    <span class="text-slate-500 group-hover:text-emerald-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
+                </button>
+
+                <button onclick="openVollzugOverviewMenu()"
+                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-2xl shrink-0">
+                            📚
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-lg text-white group-hover:text-emerald-300 transition">
+                                Übersicht
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-0.5">RDA, Befugnisse &amp; PDFs</p>
+                        </div>
+                    </div>
+                    <span class="text-slate-500 group-hover:text-emerald-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== ANSICHT 2B: VOLLZUGSRECHT -> QUIZ ==================== -->
+        <section id="view-vollzug-quiz" class="hidden flex-1 flex flex-col pb-8 animate-view">
+            <div class="flex items-center justify-between mb-4">
+                <button onclick="backToVollzugsrecht()"
+                    class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
+                    ← Vollzugsrecht
+                </button>
+                <span class="text-sm font-extrabold text-emerald-300 tracking-tight">Vollzugsrecht · Quiz</span>
+            </div>
+
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 mb-4 shadow-md">
+                <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Schwierigkeitsgrad</div>
+                <div class="grid grid-cols-2 gap-2.5">
+                    <button id="btn-vollzug-mode-easy" onclick="setVollzugMode('easy')"
+                        class="py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 bg-emerald-500/15 border-emerald-500 text-emerald-300 shadow-sm">
+                        🟢 Einfach
+                    </button>
+                    <button id="btn-vollzug-mode-hard" onclick="setVollzugMode('hard')"
+                        class="py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 bg-slate-800/70 border-slate-700 text-slate-400 hover:text-white">
+                        🔥 Schwer
+                    </button>
+                </div>
+                <p id="vollzug-mode-description" class="text-[11px] text-slate-400 mt-2.5 leading-relaxed">
+                    <strong>🟢 Einfach:</strong> Gezielte Abfrage der Paragrafenketten mit Multiple-Choice-Optionen.
+                </p>
+            </div>
+
+            <button onclick="startVollzugMixedQuiz()"
+                class="w-full mb-3 py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-lg shadow-emerald-600/25 flex items-center justify-between active:scale-[0.99] transition">
+                <span>🎲 Alle Vollzugsrecht-Fragen gemischt</span>
+                <span id="vollzug-count-badge" class="bg-white/20 px-2.5 py-0.5 rounded-full text-xs">Fragen</span>
+            </button>
+
+            <button onclick="startVollzugRdaQuiz()"
+                class="w-full mb-5 py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm bg-slate-900 hover:bg-slate-800 text-white border border-slate-800 hover:border-emerald-500/40 shadow-lg flex items-center justify-between active:scale-[0.99] transition">
+                <span>🛡️ RDA – Rechtmäßige Dienstausübung</span>
+                <span id="vollzug-rda-topic-count" class="bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full text-xs border border-emerald-500/30">Fragen</span>
+            </button>
+        </section>
+
+        <!-- ==================== ANSICHT 2C: VOLLZUGSRECHT -> ÜBERSICHT ==================== -->
+        <section id="view-vollzug-overview" class="hidden flex-1 flex flex-col pb-8 animate-view">
+            <div class="flex items-center justify-between mb-5">
+                <button onclick="backToVollzugsrecht()"
+                    class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
+                    ← Vollzugsrecht
+                </button>
+                <span class="text-sm font-extrabold text-emerald-300 tracking-tight">Vollzugsrecht · Übersicht</span>
+            </div>
+
+            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl mb-4">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">PDF Dokumente &amp; Lernmaterial</h3>
+                <div class="flex items-center gap-2">
+                    <input type="file" id="pdf-upload-vollzug" accept="application/pdf" class="hidden" onchange="handlePdfUpload('vollzug', this)">
+                    <label for="pdf-upload-vollzug" class="flex-1 py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs text-center cursor-pointer shadow-md transition active:scale-[0.99]">
+                        📂 PDF hochladen
+                    </label>
+                </div>
+            </div>
+            <div id="pdf-list-vollzug" class="space-y-2.5 mb-4"></div>
+        </section>
+
         <!-- ==================== ANSICHT 2: ZOLLRECHT (QUIZ & ÜBERSICHT) ==================== -->
         <section id="view-zollrecht" class="hidden flex-1 flex flex-col pb-8 animate-view">
             <div class="flex items-center justify-between mb-6">
@@ -262,6 +398,82 @@
         </section>
 
         <!-- ==================== ANSICHT 2B: ZOLLRECHT -> QUIZ ==================== -->
+        <section id="view-zollrecht-quiz" class="hidden flex-1 flex flex-col pb-8 animate-view">
+            <div class="flex items-center justify-between mb-4">
+                <button onclick="backToZollrecht()"
+                    class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
+                    ← Zollrecht
+                </button>
+                <span class="text-sm font-extrabold text-indigo-300 tracking-tight">Zollrecht · Quiz</span>
+            </div>
+
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 mb-4 shadow-md">
+                <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Schwierigkeitsgrad</div>
+                <div class="grid grid-cols-2 gap-2.5">
+                    <button id="btn-mode-easy" onclick="setMode('easy')"
+                        class="py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 bg-emerald-500/15 border-emerald-500 text-emerald-300 shadow-sm">
+                        🟢 Einfach
+                    </button>
+                    <button id="btn-mode-hard" onclick="setMode('hard')"
+                        class="py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 bg-slate-800/70 border-slate-700 text-slate-400 hover:text-white">
+                        🔥 Schwer
+                    </button>
+                </div>
+                <p id="mode-description" class="text-[11px] text-slate-400 mt-2.5 leading-relaxed">
+                    <strong>🟢 Einfach:</strong> Gezielte Abfrage der Rechtsgrundlagen („Wo ist … geregelt?“) mit 4 Zollrechts-Optionen.
+                </p>
+            </div>
+
+            <button onclick="startMixedQuiz()"
+                class="w-full mb-3 py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white shadow-lg shadow-indigo-600/25 flex items-center justify-between active:scale-[0.99] transition">
+                <span>🎲 Alle Themen gemischt</span>
+                <span id="mixed-count-badge" class="bg-white/20 px-2.5 py-0.5 rounded-full text-xs">Fragen</span>
+            </button>
+
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl mb-5 overflow-hidden shadow-md">
+                <button type="button" onclick="toggleOverviewPanel('custom-mix-panel', 'custom-mix-chevron')"
+                    class="w-full p-3.5 flex items-center justify-between text-left hover:bg-slate-800/60 transition active:scale-[0.99]">
+                    <div class="flex items-center gap-2.5">
+                        <span class="text-base">🎯</span>
+                        <span class="font-bold text-xs sm:text-sm text-white">Eigene Themenauswahl mischen</span>
+                    </div>
+                    <span id="custom-mix-chevron" class="text-slate-400 text-xs font-bold transition-transform duration-200">▼</span>
+                </button>
+                <div id="custom-mix-panel" class="hidden px-3.5 pb-3.5 pt-1 border-t border-slate-800/80 space-y-2">
+                    <div id="custom-mix-checkboxes" class="space-y-1.5 pt-1"></div>
+                    <button type="button" onclick="startCustomMixedQuiz()"
+                        class="w-full mt-2 py-2.5 px-4 rounded-xl font-bold text-xs bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/20 active:scale-[0.99] transition">
+                        Ausgewählte Themen gemischt starten →
+                    </button>
+                </div>
+            </div>
+
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5 px-1">Einzelne Themen</h3>
+            <div id="blocks-container" class="space-y-2.5"></div>
+        </section>
+
+        <!-- ==================== ANSICHT 2C: ZOLLRECHT -> ÜBERSICHT ==================== -->
+        <section id="view-zollrecht-overview" class="hidden flex-1 flex flex-col pb-8 animate-view">
+            <div class="flex items-center justify-between mb-5">
+                <button onclick="backToZollrecht()"
+                    class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
+                    ← Zollrecht
+                </button>
+                <span class="text-sm font-extrabold text-emerald-300 tracking-tight">Zollrecht · Übersicht</span>
+            </div>
+
+            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl mb-4">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">PDF Dokumente &amp; Lernmaterial</h3>
+                <div class="flex items-center gap-2">
+                    <input type="file" id="pdf-upload-zollrecht" accept="application/pdf" class="hidden" onchange="handlePdfUpload('zollrecht', this)">
+                    <label for="pdf-upload-zollrecht" class="flex-1 py-2.5 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs text-center cursor-pointer shadow-md transition active:scale-[0.99]">
+                        📂 PDF hochladen
+                    </label>
+                </div>
+            </div>
+            <div id="pdf-list-zollrecht" class="space-y-2.5 mb-4"></div>
+        </section>
+
         <!-- ==================== NEUE ANSICHT: GESETZ-BIBLIOTHEK & XML-IMPORTER ==================== -->
         <section id="view-gesetze" class="hidden flex-1 flex flex-col pb-8 animate-view">
             <div class="flex items-center justify-between mb-5">
@@ -320,12 +532,256 @@
             <div id="stored-laws-container" class="space-y-3 mt-4"></div>
         </section>
 
+        <!-- ==================== ANSICHT 3: AKTIVES QUIZ ==================== -->
+        <section id="view-quiz" class="hidden flex-1 flex flex-col justify-between pb-6 animate-view">
+            <div>
+                <div class="flex items-center justify-between gap-2 mb-3">
+                    <button id="quiz-back-btn" onclick="openZollQuizMenu()"
+                        class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700/70 active:scale-95 transition shrink-0">
+                        ← Menü
+                    </button>
+
+                    <div class="flex items-center gap-1.5 min-w-0">
+                        <span id="quiz-mode-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
+                            🟢 Einfach
+                        </span>
+                        <span id="quiz-block-title" class="text-xs font-bold text-slate-300 truncate">Thema</span>
+                    </div>
+
+                    <span id="quiz-counter" class="text-xs font-bold text-slate-200 bg-slate-800/80 px-2.5 py-1.5 rounded-xl border border-slate-700/70 shrink-0">1 / 10</span>
+                </div>
+
+                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden mb-5 border border-slate-700/60">
+                    <div id="quiz-progress" class="progress-fill h-full bg-gradient-to-r from-indigo-500 to-blue-400 rounded-full" style="width: 0%"></div>
+                </div>
+
+                <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-4 shadow-lg">
+                    <div id="quiz-question-tag" class="text-[10px] font-bold uppercase tracking-wider text-indigo-400 mb-1.5">Rechtsgrundlage gesucht</div>
+                    <h2 id="quiz-question-text" class="text-base sm:text-lg font-bold text-white leading-snug">Wo ist … geregelt?</h2>
+                </div>
+
+                <div id="quiz-options" class="space-y-2.5"></div>
+
+                <div id="quiz-text-input-area" class="hidden space-y-3">
+                    <div class="bg-slate-900/95 border border-slate-700/80 rounded-2xl p-4 shadow-sm">
+                        <label for="free-text-answer" class="block text-xs font-semibold text-slate-400 mb-2">
+                            Vorschrift eintippen:
+                        </label>
+                        <input id="free-text-answer" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                            placeholder="Artikel oder Paragraf eingeben…"
+                            onkeydown="if(event.key === 'Enter') handleFreeTextSubmit()"
+                            class="w-full bg-slate-950 border border-slate-700 focus:border-amber-500 focus:outline-none rounded-xl px-3.5 py-3 text-sm font-semibold text-white placeholder-slate-500 transition">
+                    </div>
+                    <button id="btn-submit-freetext" onclick="handleFreeTextSubmit()"
+                        class="w-full py-3.5 rounded-2xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-lg shadow-amber-500/20 active:scale-[0.99] transition">
+                        Antwort prüfen ✓
+                    </button>
+                </div>
+            </div>
+
+            <div id="feedback-panel" class="hidden mt-5 rounded-2xl p-4 border animate-view shadow-xl">
+                <div class="flex items-start gap-3 mb-3">
+                    <span id="feedback-emoji" class="text-xl shrink-0">✅</span>
+                    <div>
+                        <h4 id="feedback-heading" class="font-bold text-sm">Richtig!</h4>
+                        <p id="feedback-text" class="text-xs sm:text-sm text-slate-200 mt-1 leading-relaxed">Erklärung...</p>
+                    </div>
+                </div>
+                <button id="btn-next-question" onclick="nextQuestion()"
+                    class="w-full py-3 rounded-xl font-bold text-sm bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 active:scale-[0.99] transition">
+                    Nächste Frage →
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== ANSICHT 4: AUSWERTUNG ==================== -->
+        <section id="view-result" class="hidden flex-1 flex flex-col items-center justify-center pb-8 animate-view">
+            <div class="w-full bg-slate-900/95 border border-slate-800 rounded-3xl p-6 text-center shadow-2xl">
+                <div id="result-emoji" class="text-5xl mb-3">🏆</div>
+                <h2 id="result-headline" class="text-xl font-extrabold text-white mb-1">Runde abgeschlossen!</h2>
+                <p id="result-subline" class="text-xs sm:text-sm text-slate-400 mb-6">Hier ist dein Ergebnis für diese Lerneinheit.</p>
+
+                <div class="bg-slate-800/80 border border-slate-700/70 rounded-2xl p-4 mb-6">
+                    <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Ergebnis</div>
+                    <div id="result-score-text" class="text-2xl font-extrabold text-emerald-400">0 von 0 richtig</div>
+                    <div id="result-percent-text" class="text-xs font-semibold text-indigo-300 mt-1">0 % Trefferquote</div>
+                </div>
+
+                <div id="result-mistakes-container" class="hidden text-left mb-6">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-rose-300 mb-2.5 px-1">❌ Falsch beantwortet</h3>
+                    <div id="result-mistakes-list" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
+                </div>
+
+                <div class="space-y-3">
+                    <button onclick="if(lastQuizTrigger) lastQuizTrigger(); else goHome();"
+                        class="w-full py-3.5 rounded-2xl font-bold text-sm bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white shadow-lg shadow-indigo-600/25 active:scale-[0.99] transition">
+                        🔄 Nochmal üben
+                    </button>
+                    <button onclick="goHome()"
+                        class="w-full py-3.5 rounded-2xl font-bold text-sm bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 active:scale-[0.99] transition">
+                        ← Zurück zur Startseite
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ==================== PDF VIEWER MODAL ==================== -->
+    <div id="pdf-viewer-modal" class="hidden fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-sm flex flex-col p-4 animate-view">
+        <div class="flex items-center justify-between mb-3 bg-slate-900 border border-slate-800 rounded-2xl px-4 py-3 shadow-lg">
+            <h3 id="pdf-modal-title" class="text-xs sm:text-sm font-extrabold text-white truncate max-w-[200px] sm:max-w-md">Dokument</h3>
+            <div class="flex items-center gap-2">
+                <button onclick="prevPdfPage()" class="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold text-slate-200 hover:bg-slate-700">←</button>
+                <span id="pdf-page-indicator" class="text-xs font-bold text-slate-300">Seite 1 / 1</span>
+                <button onclick="nextPdfPage()" class="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold text-slate-200 hover:bg-slate-700">→</button>
+                <button onclick="closePdfViewer()" class="ml-2 w-8 h-8 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-300 font-bold text-sm">✕</button>
+            </div>
+        </div>
+        <div class="flex-1 overflow-auto bg-slate-950 border border-slate-800 rounded-2xl flex items-center justify-center p-4">
+            <canvas id="pdf-canvas" class="max-w-full shadow-2xl rounded-lg"></canvas>
+        </div>
     </div>
 
     <script>
         const SUPABASE_URL = 'https://qetnzemgradebzqwhfut.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_FA9Miksbe1RSBi2MmtasTw_Bi6_5AZB';
         const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let zollBlocks = [];
+        let vollzugQuizItems = [];
+        let allSourcesPool = [];
+        let vollzugSourcesPool = [];
+
+        function getOrCreateDeviceId() {
+            let devId = localStorage.getItem('zoll_app_device_id');
+            if (!devId) {
+                devId = 'dev_' + Math.random().toString(36).substring(2, 11) + '_' + Date.now().toString(36);
+                localStorage.setItem('zoll_app_device_id', devId);
+            }
+            return devId;
+        }
+
+        function hydrateAndUnlockApp(content) {
+            zollBlocks = content.zollBlocks || [];
+            vollzugQuizItems = content.vollzugQuizItems || [];
+            allSourcesPool = zollBlocks.flatMap(b => b.items.map(i => i.source));
+            vollzugSourcesPool = vollzugQuizItems.map(i => i.source);
+
+            const vzBadge = document.getElementById('vollzug-count-badge');
+            if (vzBadge) vzBadge.textContent = `${vollzugQuizItems.length} Fragen`;
+            const vzTopicBadge = document.getElementById('vollzug-rda-topic-count');
+            if (vzTopicBadge) vzTopicBadge.textContent = `${vollzugQuizItems.length} Fragen`;
+            const vzSub = document.getElementById('vollzug-menu-subtitle');
+            if (vzSub) vzSub.textContent = `${vollzugQuizItems.length} RDA-Fragen & Paragrafenketten üben`;
+
+            document.getElementById('auth-gate').classList.add('hidden');
+            document.getElementById('app').classList.remove('hidden');
+
+            loadOverviewPdfs('rss');
+            loadOverviewPdfs('vollzug');
+            loadOverviewPdfs('zollrecht');
+        }
+
+        function showAuthError(msg) {
+            const box = document.getElementById('auth-error-box');
+            box.textContent = msg;
+            box.classList.remove('hidden');
+        }
+
+        async function checkExistingSession() {
+            const savedCode = localStorage.getItem('zoll_app_saved_code');
+            const deviceId = getOrCreateDeviceId();
+            if (!savedCode) return;
+
+            const btn = document.getElementById('btn-verify-code');
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = 'Sitzung wird geprüft…';
+            }
+
+            try {
+                const { data, error } = await sbClient.rpc('get_protected_content', {
+                    p_code: savedCode,
+                    p_device_id: deviceId
+                });
+
+                if (!error && data && data.status === 'ok' && data.content) {
+                    hydrateAndUnlockApp(data.content);
+                } else {
+                    localStorage.removeItem('zoll_app_saved_code');
+                }
+            } catch (e) {} finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.textContent = 'Zugang freischalten →';
+                }
+            }
+        }
+
+        async function verifyAccessCode() {
+            const input = document.getElementById('access-code-input');
+            const btn = document.getElementById('btn-verify-code');
+            const errorBox = document.getElementById('auth-error-box');
+            const code = input.value.trim().toUpperCase();
+
+            errorBox.classList.add('hidden');
+            if (!code) {
+                showAuthError('Bitte gib zuerst einen Zugangscode ein.');
+                input.focus();
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Wird geprüft…';
+            const deviceId = getOrCreateDeviceId();
+
+            try {
+                const { data, error } = await sbClient.rpc('get_protected_content', {
+                    p_code: code,
+                    p_device_id: deviceId
+                });
+
+                if (error || !data) {
+                    showAuthError('Verbindungsfehler beim Prüfen des Codes.');
+                } else if (data.status === 'invalid_code') {
+                    showAuthError('Ungültiger Zugangscode.');
+                } else if (data.status === 'wrong_device') {
+                    showAuthError('Bereits auf anderem Gerät aktiviert.');
+                } else if (data.status === 'ok' && data.content) {
+                    localStorage.setItem('zoll_app_saved_code', code);
+                    hydrateAndUnlockApp(data.content);
+                }
+            } catch (err) {
+                showAuthError('Netzwerkfehler.');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Zugang freischalten →';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', checkExistingSession);
+
+        function hideAllViews() {
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-rss').classList.add('hidden');
+            document.getElementById('view-rss-quiz').classList.add('hidden');
+            document.getElementById('view-rss-overview').classList.add('hidden');
+            document.getElementById('view-vollzug').classList.add('hidden');
+            document.getElementById('view-vollzug-quiz').classList.add('hidden');
+            document.getElementById('view-vollzug-overview').classList.add('hidden');
+            document.getElementById('view-zollrecht').classList.add('hidden');
+            document.getElementById('view-zollrecht-quiz').classList.add('hidden');
+            document.getElementById('view-zollrecht-overview').classList.add('hidden');
+            document.getElementById('view-gesetze').classList.add('hidden');
+            document.getElementById('view-quiz').classList.add('hidden');
+            document.getElementById('view-result').classList.add('hidden');
+        }
+
+        function goHome() {
+            hideAllViews();
+            document.getElementById('view-home').classList.remove('hidden');
+        }
 
         function openMainTopic(topicKey) {
             hideAllViews();
@@ -341,17 +797,17 @@
             }
         }
 
-        function hideAllViews() {
-            document.querySelectorAll('main > div, section[id^="view-"]').forEach(el => el.classList.add('hidden'));
-            document.getElementById('view-home').classList.add('hidden');
-        }
+        function backToRss() { hideAllViews(); document.getElementById('view-rss').classList.remove('hidden'); }
+        function openRssQuizMenu() { hideAllViews(); document.getElementById('view-rss-quiz').classList.remove('hidden'); }
+        function openRssOverviewMenu() { hideAllViews(); document.getElementById('view-rss-overview').classList.remove('hidden'); loadOverviewPdfs('rss'); }
+        function backToVollzugsrecht() { hideAllViews(); document.getElementById('view-vollzug').classList.remove('hidden'); }
+        function openVollzugQuizMenu() { hideAllViews(); document.getElementById('view-vollzug-quiz').classList.remove('hidden'); }
+        function openVollzugOverviewMenu() { hideAllViews(); document.getElementById('view-vollzug-overview').classList.remove('hidden'); loadOverviewPdfs('vollzug'); }
+        function backToZollrecht() { hideAllViews(); document.getElementById('view-zollrecht').classList.remove('hidden'); }
+        function openZollQuizMenu() { hideAllViews(); renderZollrechtBlocks(); document.getElementById('view-zollrecht-quiz').classList.remove('hidden'); }
+        function openZollOverviewMenu() { hideAllViews(); document.getElementById('view-zollrecht-overview').classList.remove('hidden'); loadOverviewPdfs('zollrecht'); }
 
-        function goHome() {
-            hideAllViews();
-            document.getElementById('view-home').classList.remove('hidden');
-        }
-
-        // XML Importer Logik
+        // XML Importer & Supabase Storage Logik
         let stagedLawData = null;
         let loadedDbNorms = [];
 
@@ -538,6 +994,11 @@
             });
             container.appendChild(fragment);
         }
+
+        // PDF & Sound Platzhalter Hilfsfunktionen
+        let soundEnabled = true;
+        function toggleSound() { soundEnabled = !soundEnabled; }
+        async function loadOverviewPdfs() {}
     </script>
 </body>
 </html>
