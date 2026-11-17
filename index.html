@@ -143,7 +143,7 @@
                     <span class="text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
                 </button>
 
-                <!-- NEU: Gesetz-Bibliothek direkt auf der Hauptseite -->
+                <!-- NEU: Gesetz-Bibliothek auf der Startseite -->
                 <button onclick="openMainTopic('gesetze')"
                     class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
@@ -393,23 +393,6 @@
                         </div>
                     </div>
                     <span class="text-slate-500 group-hover:text-emerald-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
-                </button>
-
-                <!-- NEU: Gesetz-Bibliothek unter Zollrecht -->
-                <button onclick="openMainTopic('gesetze')"
-                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-2xl shrink-0">
-                            📜
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white group-hover:text-amber-300 transition">
-                                Gesetz-Bibliothek &amp; XML-Importer
-                            </h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Gesetze hochladen &amp; dauerhaft in Supabase speichern</p>
-                        </div>
-                    </div>
-                    <span class="text-slate-500 group-hover:text-amber-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
                 </button>
             </div>
         </section>
@@ -814,17 +797,56 @@
             }
         }
 
-        function backToRss() { hideAllViews(); document.getElementById('view-rss').classList.remove('hidden'); }
-        function openRssQuizMenu() { hideAllViews(); document.getElementById('view-rss-quiz').classList.remove('hidden'); }
-        function openRssOverviewMenu() { hideAllViews(); document.getElementById('view-rss-overview').classList.remove('hidden'); loadOverviewPdfs('rss'); }
-        function backToVollzugsrecht() { hideAllViews(); document.getElementById('view-vollzug').classList.remove('hidden'); }
-        function openVollzugQuizMenu() { hideAllViews(); document.getElementById('view-vollzug-quiz').classList.remove('hidden'); }
-        function openVollzugOverviewMenu() { hideAllViews(); document.getElementById('view-vollzug-overview').classList.remove('hidden'); loadOverviewPdfs('vollzug'); }
-        function backToZollrecht() { hideAllViews(); document.getElementById('view-zollrecht').classList.remove('hidden'); }
-        function openZollQuizMenu() { hideAllViews(); renderZollrechtBlocks(); document.getElementById('view-zollrecht-quiz').classList.remove('hidden'); }
-        function openZollOverviewMenu() { hideAllViews(); document.getElementById('view-zollrecht-overview').classList.remove('hidden'); loadOverviewPdfs('zollrecht'); }
+        function backToRss() {
+            hideAllViews();
+            document.getElementById('view-rss').classList.remove('hidden');
+        }
 
-        // XML Importer & Supabase Storage Logik
+        function openRssQuizMenu() {
+            hideAllViews();
+            document.getElementById('view-rss-quiz').classList.remove('hidden');
+        }
+
+        function openRssOverviewMenu() {
+            hideAllViews();
+            document.getElementById('view-rss-overview').classList.remove('hidden');
+            loadOverviewPdfs('rss');
+        }
+
+        function backToVollzugsrecht() {
+            hideAllViews();
+            document.getElementById('view-vollzug').classList.remove('hidden');
+        }
+
+        function openVollzugQuizMenu() {
+            hideAllViews();
+            document.getElementById('view-vollzug-quiz').classList.remove('hidden');
+        }
+
+        function openVollzugOverviewMenu() {
+            hideAllViews();
+            document.getElementById('view-vollzug-overview').classList.remove('hidden');
+            loadOverviewPdfs('vollzug');
+        }
+
+        function backToZollrecht() {
+            hideAllViews();
+            document.getElementById('view-zollrecht').classList.remove('hidden');
+        }
+
+        function openZollQuizMenu() {
+            hideAllViews();
+            renderZollrechtBlocks();
+            document.getElementById('view-zollrecht-quiz').classList.remove('hidden');
+        }
+
+        function openZollOverviewMenu() {
+            hideAllViews();
+            document.getElementById('view-zollrecht-overview').classList.remove('hidden');
+            loadOverviewPdfs('zollrecht');
+        }
+
+        // ==================== XML IMPORTER & SUPABASE SPEICHERUNG ====================
         let stagedLawData = null;
         let loadedDbNorms = [];
 
@@ -1011,11 +1033,6 @@
             });
             container.appendChild(fragment);
         }
-
-        // PDF & Sound Platzhalter Hilfsfunktionen
-        let soundEnabled = true;
-        function toggleSound() { soundEnabled = !soundEnabled; }
-        async function loadOverviewPdfs() {}
     </script>
 </body>
 </html>
