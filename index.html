@@ -81,7 +81,7 @@
         </div>
     </div>
 
-    <!-- ==================== HAUPT-APP ==================== -->
+    <!-- ==================== HAUPT-APP (ERST NACH FREISCHALTUNG SICHTBAR) ==================== -->
     <div id="app" class="hidden w-full max-w-lg min-h-screen flex flex-col px-4 py-5">
 
         <!-- Obere Leiste -->
@@ -143,7 +143,7 @@
                     <span class="text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
                 </button>
 
-                <!-- NEU: Gesetz-Bibliothek auf der Startseite -->
+                <!-- NEU: Gesetz-Bibliothek direkt auf der Startseite -->
                 <button onclick="openMainTopic('gesetze')"
                     class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
@@ -207,7 +207,7 @@
             </div>
         </section>
 
-        <!-- ==================== ANSICHT 1C: RSS & AUSLÄNDERRECHT -> QUIZ ==================== -->
+        <!-- ==================== ANSICHT 1C: RSS -> QUIZ ==================== -->
         <section id="view-rss-quiz" class="hidden flex-1 flex flex-col pb-8 animate-view">
             <div class="flex items-center justify-between mb-4">
                 <button onclick="backToRss()"
@@ -223,7 +223,7 @@
             </div>
         </section>
 
-        <!-- ==================== ANSICHT 1D: RSS & AUSLÄNDERRECHT -> ÜBERSICHT ==================== -->
+        <!-- ==================== ANSICHT 1D: RSS -> ÜBERSICHT ==================== -->
         <section id="view-rss-overview" class="hidden flex-1 flex flex-col pb-8 animate-view">
             <div class="flex items-center justify-between mb-5">
                 <button onclick="backToRss()"
@@ -352,7 +352,7 @@
             <div id="pdf-list-vollzug" class="space-y-2.5 mb-4"></div>
         </section>
 
-        <!-- ==================== ANSICHT 2: ZOLLRECHT (QUIZ & ÜBERSICHT) ==================== -->
+        <!-- ==================== ANSICHT 3: ZOLLRECHT MENÜ ==================== -->
         <section id="view-zollrecht" class="hidden flex-1 flex flex-col pb-8 animate-view">
             <div class="flex items-center justify-between mb-6">
                 <button onclick="goHome()"
@@ -397,7 +397,7 @@
             </div>
         </section>
 
-        <!-- ==================== ANSICHT 2B: ZOLLRECHT -> QUIZ ==================== -->
+        <!-- ==================== ANSICHT 3B: ZOLLRECHT -> QUIZ ==================== -->
         <section id="view-zollrecht-quiz" class="hidden flex-1 flex flex-col pb-8 animate-view">
             <div class="flex items-center justify-between mb-4">
                 <button onclick="backToZollrecht()"
@@ -452,7 +452,7 @@
             <div id="blocks-container" class="space-y-2.5"></div>
         </section>
 
-        <!-- ==================== ANSICHT 2C: ZOLLRECHT -> ÜBERSICHT ==================== -->
+        <!-- ==================== ANSICHT 3C: ZOLLRECHT -> ÜBERSICHT ==================== -->
         <section id="view-zollrecht-overview" class="hidden flex-1 flex flex-col pb-8 animate-view">
             <div class="flex items-center justify-between mb-5">
                 <button onclick="backToZollrecht()"
@@ -474,7 +474,7 @@
             <div id="pdf-list-zollrecht" class="space-y-2.5 mb-4"></div>
         </section>
 
-        <!-- ==================== NEUE ANSICHT: GESETZ-BIBLIOTHEK & XML-IMPORTER ==================== -->
+        <!-- ==================== ANSICHT 4: GESETZ-BIBLIOTHEK & XML-IMPORTER ==================== -->
         <section id="view-gesetze" class="hidden flex-1 flex flex-col pb-8 animate-view">
             <div class="flex items-center justify-between mb-5">
                 <button onclick="goHome()"
@@ -532,7 +532,7 @@
             <div id="stored-laws-container" class="space-y-3 mt-4"></div>
         </section>
 
-        <!-- ==================== ANSICHT 3: AKTIVES QUIZ ==================== -->
+        <!-- ==================== ANSICHT 5: AKTIVES QUIZ ==================== -->
         <section id="view-quiz" class="hidden flex-1 flex flex-col justify-between pb-6 animate-view">
             <div>
                 <div class="flex items-center justify-between gap-2 mb-3">
@@ -594,7 +594,7 @@
             </div>
         </section>
 
-        <!-- ==================== ANSICHT 4: AUSWERTUNG ==================== -->
+        <!-- ==================== ANSICHT 6: AUSWERTUNG ==================== -->
         <section id="view-result" class="hidden flex-1 flex flex-col items-center justify-center pb-8 animate-view">
             <div class="w-full bg-slate-900/95 border border-slate-800 rounded-3xl p-6 text-center shadow-2xl">
                 <div id="result-emoji" class="text-5xl mb-3">🏆</div>
@@ -762,108 +762,110 @@
 
         window.addEventListener('DOMContentLoaded', checkExistingSession);
 
-        function hideAllViews() {
-            document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-rss').classList.add('hidden');
-            document.getElementById('view-rss-quiz').classList.add('hidden');
-            document.getElementById('view-rss-overview').classList.add('hidden');
-            document.getElementById('view-vollzug').classList.add('hidden');
-            document.getElementById('view-vollzug-quiz').classList.add('hidden');
-            document.getElementById('view-vollzug-overview').classList.add('hidden');
-            document.getElementById('view-zollrecht').classList.add('hidden');
-            document.getElementById('view-zollrecht-quiz').classList.add('hidden');
-            document.getElementById('view-zollrecht-overview').classList.add('hidden');
-            document.getElementById('view-gesetze').classList.add('hidden');
-            document.getElementById('view-quiz').classList.add('hidden');
-            document.getElementById('view-result').classList.add('hidden');
+        // PDF & Storage Uploads
+        async function handlePdfUpload(topic, inputElement) {
+            const file = inputElement.files[0];
+            if (!file) return;
+            if (file.type !== 'application/pdf') { alert('Nur PDF-Dateien.'); return; }
+
+            const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9_.-]/g, '_')}`;
+            const filePath = `${topic}/${fileName}`;
+
+            try {
+                const { error: uploadError } = await sbClient.storage.from('overview-pdfs').upload(filePath, file);
+                if (uploadError) { alert('Upload-Fehler: ' + uploadError.message); return; }
+
+                const { data: urlData } = sbClient.storage.from('overview-pdfs').getPublicUrl(filePath);
+                await sbClient.from('overview_documents').insert([{
+                    topic: topic,
+                    file_name: file.name,
+                    display_name: file.name.replace(/\.[^/.]+$/, ""),
+                    file_url: urlData.publicUrl
+                }]);
+
+                inputElement.value = '';
+                loadOverviewPdfs(topic);
+            } catch (err) { alert('Unerwarteter Fehler.'); }
         }
 
-        function goHome() {
-            hideAllViews();
-            document.getElementById('view-home').classList.remove('hidden');
-        }
+        async function loadOverviewPdfs(topic) {
+            const containerId = topic === 'rss' ? 'pdf-list-rss' : (topic === 'vollzug' ? 'pdf-list-vollzug' : 'pdf-list-zollrecht');
+            const container = document.getElementById(containerId);
+            if (!container) return;
 
-        function openMainTopic(topicKey) {
-            hideAllViews();
-            if (topicKey === 'rss') {
-                document.getElementById('view-rss').classList.remove('hidden');
-            } else if (topicKey === 'vollzug') {
-                document.getElementById('view-vollzug').classList.remove('hidden');
-            } else if (topicKey === 'zollrecht') {
-                document.getElementById('view-zollrecht').classList.remove('hidden');
-            } else if (topicKey === 'gesetze') {
-                document.getElementById('view-gesetze').classList.remove('hidden');
-                loadLawsFromSupabase();
+            const { data } = await sbClient.from('overview_documents').select('*').eq('topic', topic).order('created_at', { ascending: false });
+            if (!data || data.length === 0) {
+                container.innerHTML = '<p class="text-xs text-slate-500 italic px-1">Noch keine PDFs hochgeladen.</p>';
+                return;
             }
+
+            container.innerHTML = '';
+            data.forEach(doc => {
+                const item = document.createElement('div');
+                item.className = "bg-slate-900/90 border border-slate-800 rounded-2xl p-3 flex items-center justify-between gap-3 shadow-md";
+                item.innerHTML = `
+                    <div class="flex items-center gap-3 min-w-0 cursor-pointer flex-1" onclick="openPdfViewer('${doc.file_url}', '${doc.display_name}')">
+                        <div class="w-9 h-9 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-base shrink-0">📄</div>
+                        <div class="min-w-0">
+                            <h4 class="font-bold text-xs sm:text-sm text-white truncate">${doc.display_name}</h4>
+                            <span class="text-[10px] text-slate-400">PDF-Dokument</span>
+                        </div>
+                    </div>
+                    <button onclick="deleteDoc('${doc.id}', '${doc.topic}')" class="w-8 h-8 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-300 text-xs">🗑️</button>
+                `;
+                container.appendChild(item);
+            });
         }
 
-        function backToRss() {
-            hideAllViews();
-            document.getElementById('view-rss').classList.remove('hidden');
+        async function deleteDoc(id, topic) {
+            if (!confirm('Dokument löschen?')) return;
+            await sbClient.from('overview_documents').delete().eq('id', id);
+            loadOverviewPdfs(topic);
         }
 
-        function openRssQuizMenu() {
-            hideAllViews();
-            document.getElementById('view-rss-quiz').classList.remove('hidden');
+        // PDF.js Viewer
+        let pdfDoc = null, pageNum = 1, scale = 1.3, pageRendering = false, pageNumPending = null;
+        async function openPdfViewer(url, title) {
+            document.getElementById('pdf-modal-title').textContent = title;
+            document.getElementById('pdf-viewer-modal').classList.remove('hidden');
+            try {
+                pdfDoc = await pdfjsLib.getDocument(url).promise;
+                pageNum = 1;
+                renderPage(pageNum);
+            } catch (e) { alert('PDF konnte nicht geladen werden.'); closePdfViewer(); }
         }
-
-        function openRssOverviewMenu() {
-            hideAllViews();
-            document.getElementById('view-rss-overview').classList.remove('hidden');
-            loadOverviewPdfs('rss');
+        function renderPage(num) {
+            pageRendering = true;
+            pdfDoc.getPage(num).then(page => {
+                const canvas = document.getElementById('pdf-canvas');
+                const ctx = canvas.getContext('2d');
+                const viewport = page.getViewport({ scale });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                page.render({ canvasContext: ctx, viewport }).promise.then(() => {
+                    pageRendering = false;
+                    if (pageNumPending !== null) { renderPage(pageNumPending); pageNumPending = null; }
+                });
+            });
+            document.getElementById('pdf-page-indicator').textContent = `Seite ${num} / ${pdfDoc.numPages}`;
         }
+        function prevPdfPage() { if (!pdfDoc || pageNum <= 1) return; pageNum--; renderPage(pageNum); }
+        function nextPdfPage() { if (!pdfDoc || pageNum >= pdfDoc.numPages) return; pageNum++; renderPage(pageNum); }
+        function closePdfViewer() { document.getElementById('pdf-viewer-modal').classList.add('hidden'); pdfDoc = null; }
 
-        function backToVollzugsrecht() {
-            hideAllViews();
-            document.getElementById('view-vollzug').classList.remove('hidden');
-        }
-
-        function openVollzugQuizMenu() {
-            hideAllViews();
-            document.getElementById('view-vollzug-quiz').classList.remove('hidden');
-        }
-
-        function openVollzugOverviewMenu() {
-            hideAllViews();
-            document.getElementById('view-vollzug-overview').classList.remove('hidden');
-            loadOverviewPdfs('vollzug');
-        }
-
-        function backToZollrecht() {
-            hideAllViews();
-            document.getElementById('view-zollrecht').classList.remove('hidden');
-        }
-
-        function openZollQuizMenu() {
-            hideAllViews();
-            renderZollrechtBlocks();
-            document.getElementById('view-zollrecht-quiz').classList.remove('hidden');
-        }
-
-        function openZollOverviewMenu() {
-            hideAllViews();
-            document.getElementById('view-zollrecht-overview').classList.remove('hidden');
-            loadOverviewPdfs('zollrecht');
-        }
-
-        // ==================== XML IMPORTER & SUPABASE SPEICHERUNG ====================
-        let stagedLawData = null;
-        let loadedDbNorms = [];
-
+        // XML Importer & Supabase Laws
+        let stagedLawData = null, loadedDbNorms = [];
         function handleLawXmlUpload(inputElement) {
             const file = inputElement.files[0];
             if (!file) return;
-
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
                     stagedLawData = parseGesetzeImInternetXmlToDb(e.target.result, file.name);
                     document.getElementById('import-law-title').textContent = `${stagedLawData.fullTitle} (${stagedLawData.abbreviation})`;
-                    document.getElementById('import-law-meta').textContent = `${stagedLawData.norms.length} Paragrafen erfolgreich geparst und bereit zum Speichern.`;
+                    document.getElementById('import-law-meta').textContent = `${stagedLawData.norms.length} Paragrafen erkannt.`;
                     document.getElementById('import-preview-box').classList.remove('hidden');
-                } catch (err) {
-                    alert('Fehler beim Parsen der XML: ' + err.message);
-                }
+                } catch (err) { alert('XML Parse Fehler: ' + err.message); }
             };
             reader.readAsText(file, 'UTF-8');
         }
@@ -876,163 +878,117 @@
 
             let lawAbk = '', lawTitle = '';
             const norms = [];
-
             normElements.forEach((norm, index) => {
                 const metadaten = norm.querySelector('metadaten');
                 const textdaten = norm.querySelector('textdaten');
-
                 if (index === 0 && metadaten) {
                     lawAbk = (metadaten.querySelector('amtabk, jurabk')?.textContent || fileName).trim();
                     lawTitle = (metadaten.querySelector('langue')?.textContent || 'Gesetz').trim();
                 }
-
                 const enbez = metadaten?.querySelector('enbez')?.textContent.trim() || '';
                 const titel = metadaten?.querySelector('titel')?.textContent.trim() || '';
                 const contentNode = textdaten?.querySelector('text Content') || textdaten?.querySelector('text');
-                
-                let plainText = '';
-                if (contentNode) {
-                    plainText = contentNode.textContent.replace(/\s+/g, ' ').trim();
-                }
+                const plainText = contentNode ? contentNode.textContent.replace(/\s+/g, ' ').trim() : '';
 
                 if (enbez || plainText) {
-                    norms.push({
-                        abkuerzung: lawAbk,
-                        gesetz_titel: lawTitle,
-                        paragraf: enbez,
-                        titel: titel,
-                        inhalt: plainText
-                    });
+                    norms.push({ abkuerzung: lawAbk, gesetz_titel: lawTitle, paragraf: enbez, titel, inhalt: plainText });
                 }
             });
-
             return { abbreviation: lawAbk, fullTitle: lawTitle, norms };
         }
 
         async function saveImportedLawToSupabase() {
             if (!stagedLawData || !stagedLawData.norms.length) return;
-
             try {
-                const { error } = await sbClient
-                    .from('gesetze_paragrafen')
-                    .upsert(stagedLawData.norms, { onConflict: ['abkuerzung', 'paragraf'] });
-
+                const { error } = await sbClient.from('gesetze_paragrafen').upsert(stagedLawData.norms, { onConflict: ['abkuerzung', 'paragraf'] });
                 if (error) throw error;
-
-                alert(`Erfolgreich! ${stagedLawData.norms.length} Paragrafen von "${stagedLawData.abbreviation}" wurden in Supabase gespeichert.`);
+                alert(`Erfolgreich! ${stagedLawData.norms.length} Paragrafen gespeichert.`);
                 document.getElementById('import-preview-box').classList.add('hidden');
-                document.getElementById('law-xml-input').value = '';
                 loadLawsFromSupabase();
-            } catch (err) {
-                alert('Fehler beim Speichern in Supabase: ' + err.message);
-            }
+            } catch (err) { alert('Speicherfehler: ' + err.message); }
         }
 
         async function loadLawsFromSupabase() {
             const selectEl = document.getElementById('select-law-abk');
-            selectEl.innerHTML = '<option value="">Lade Gesetze aus Supabase...</option>';
+            selectEl.innerHTML = '<option value="">Lade Gesetze...</option>';
+            const { data } = await sbClient.from('gesetze_paragrafen').select('abkuerzung, gesetz_titel').order('abkuerzung');
+            if (!data) { selectEl.innerHTML = '<option value="">Keine Gesetze gefunden</option>'; return; }
 
-            const { data, error } = await sbClient
-                .from('gesetze_paragrafen')
-                .select('abkuerzung, gesetz_titel')
-                .order('abkuerzung');
-
-            if (error || !data) {
-                selectEl.innerHTML = '<option value="">Fehler beim Laden der Gesetze</option>';
-                return;
-            }
-
-            const uniqueLaws = [];
+            const unique = [];
             const seen = new Set();
-            data.forEach(row => {
-                if (!seen.has(row.abkuerzung)) {
-                    seen.add(row.abkuerzung);
-                    uniqueLaws.push(row);
-                }
-            });
+            data.forEach(r => { if (!seen.has(r.abkuerzung)) { seen.add(r.abkuerzung); unique.push(r); } });
 
-            selectEl.innerHTML = '<option value="">-- Wähle ein gespeichertes Gesetz --</option>';
-            uniqueLaws.forEach(law => {
+            selectEl.innerHTML = '<option value="">-- Gesetz aus Supabase wählen --</option>';
+            unique.forEach(l => {
                 const opt = document.createElement('option');
-                opt.value = law.abkuerzung;
-                opt.textContent = `${law.abkuerzung} – ${law.gesetz_titel}`;
+                opt.value = l.abkuerzung;
+                opt.textContent = `${l.abkuerzung} – ${l.gesetz_titel}`;
                 selectEl.appendChild(opt);
             });
         }
 
         async function onLawSelectionChange() {
             const abk = document.getElementById('select-law-abk').value;
-            if (!abk) {
-                loadedDbNorms = [];
-                document.getElementById('stored-laws-container').innerHTML = '';
-                return;
-            }
-
-            const { data, error } = await sbClient
-                .from('gesetze_paragrafen')
-                .select('*')
-                .eq('abkuerzung', abk)
-                .order('id');
-
-            if (error || !data) return;
-
-            loadedDbNorms = data;
+            if (!abk) { loadedDbNorms = []; document.getElementById('stored-laws-container').innerHTML = ''; return; }
+            const { data } = await sbClient.from('gesetze_paragrafen').select('*').eq('abkuerzung', abk).order('id');
+            loadedDbNorms = data || [];
             renderStoredLaws(loadedDbNorms);
         }
 
         function filterStoredLaws() {
             const query = document.getElementById('law-search-input').value.toLowerCase().trim();
             if (!loadedDbNorms.length) return;
-
-            if (!query) {
-                renderStoredLaws(loadedDbNorms);
-                return;
-            }
-
-            let normalizedQuery = query.replace(/\babs(?:atz)?\.?\s*(\d+)\b/g, '($1)');
-            const filtered = loadedDbNorms.filter(norm => {
-                const searchStr = `${norm.paragraf} ${norm.titel} ${norm.inhalt}`.toLowerCase();
-                const queryNum = normalizedQuery.replace(/[§\s]/g, '');
-                const paraNum = norm.paragraf.toLowerCase().replace(/[§\s]/g, '');
-
-                if (/^\d+[a-z]?$/.test(queryNum)) {
-                    return paraNum === queryNum || paraNum === `${queryNum}a` || paraNum === `${queryNum}b`;
-                }
-
-                return searchStr.includes(normalizedQuery);
-            });
-
+            if (!query) { renderStoredLaws(loadedDbNorms); return; }
+            const filtered = loadedDbNorms.filter(n => `${n.paragraf} ${n.titel} ${n.inhalt}`.toLowerCase().includes(query));
             renderStoredLaws(filtered);
         }
 
         function renderStoredLaws(norms) {
             const container = document.getElementById('stored-laws-container');
             container.innerHTML = '';
-
-            if (norms.length === 0) {
-                container.innerHTML = '<div class="bg-slate-900 p-5 rounded-2xl text-center text-xs text-slate-400 border border-slate-800">Keine passenden Paragrafen gefunden.</div>';
-                return;
-            }
-
-            const fragment = document.createDocumentFragment();
-            norms.forEach(norm => {
+            if (norms.length === 0) { container.innerHTML = '<div class="bg-slate-900 p-4 rounded-xl text-center text-xs text-slate-400">Keine Paragrafen gefunden.</div>'; return; }
+            norms.forEach(n => {
                 const card = document.createElement('div');
                 card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-md space-y-2";
-                
-                let formattedText = (norm.inhalt || '').replace(/(\(\d+\))/g, '<br><strong class="text-amber-400">$1</strong>');
-
                 card.innerHTML = `
                     <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-                        <span class="px-2.5 py-1 bg-amber-500/15 text-amber-300 font-bold text-xs rounded-lg border border-amber-500/30">${norm.paragraf}</span>
-                        <span class="text-[10px] font-semibold text-slate-400 uppercase">${norm.abkuerzung}</span>
+                        <span class="px-2.5 py-1 bg-amber-500/15 text-amber-300 font-bold text-xs rounded-lg">${n.paragraf}</span>
+                        <span class="text-[10px] text-slate-400 uppercase">${n.abkuerzung}</span>
                     </div>
-                    ${norm.titel ? `<h4 class="font-bold text-sm text-white">${norm.titel}</h4>` : ''}
-                    <div class="text-xs text-slate-300 leading-relaxed whitespace-pre-line">${formattedText}</div>
+                    ${n.titel ? `<h4 class="font-bold text-sm text-white">${n.titel}</h4>` : ''}
+                    <div class="text-xs text-slate-300 leading-relaxed whitespace-pre-line">${n.inhalt}</div>
                 `;
-                fragment.appendChild(card);
+                container.appendChild(card);
             });
-            container.appendChild(fragment);
         }
+
+        // Navigation & Quiz Helpers
+        let currentMode = 'easy', currentVollzugMode = 'easy', soundEnabled = true, audioCtx = null;
+        let activeQuizItems = [], activeQuizTitle = '', currentIndex = 0, correctCount = 0, wrongAnswersLog = [], answeredCurrent = false, lastQuizTrigger = null, activeQuizOrigin = 'zoll';
+
+        function hideAllViews() {
+            ['view-home', 'view-rss', 'view-rss-quiz', 'view-rss-overview', 'view-vollzug', 'view-vollzug-quiz', 'view-vollzug-overview', 'view-zollrecht', 'view-zollrecht-quiz', 'view-zollrecht-overview', 'view-gesetze', 'view-quiz', 'view-result'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+        }
+        function goHome() { hideAllViews(); document.getElementById('view-home').classList.remove('hidden'); }
+        function openMainTopic(k) {
+            hideAllViews();
+            if (k === 'rss') document.getElementById('view-rss').classList.remove('hidden');
+            else if (k === 'vollzug') document.getElementById('view-vollzug').classList.remove('hidden');
+            else if (k === 'zollrecht') document.getElementById('view-zollrecht').classList.remove('hidden');
+            else if (k === 'gesetze') { document.getElementById('view-gesetze').classList.remove('hidden'); loadLawsFromSupabase(); }
+        }
+        function backToRss() { hideAllViews(); document.getElementById('view-rss').classList.remove('hidden'); }
+        function openRssQuizMenu() { hideAllViews(); document.getElementById('view-rss-quiz').classList.remove('hidden'); }
+        function openRssOverviewMenu() { hideAllViews(); document.getElementById('view-rss-overview').classList.remove('hidden'); loadOverviewPdfs('rss'); }
+        function backToVollzugsrecht() { hideAllViews(); document.getElementById('view-vollzug').classList.remove('hidden'); }
+        function openVollzugQuizMenu() { hideAllViews(); document.getElementById('view-vollzug-quiz').classList.remove('hidden'); }
+        function openVollzugOverviewMenu() { hideAllViews(); document.getElementById('view-vollzug-overview').classList.remove('hidden'); loadOverviewPdfs('vollzug'); }
+        function backToZollrecht() { hideAllViews(); document.getElementById('view-zollrecht').classList.remove('hidden'); }
+        function openZollQuizMenu() { hideAllViews(); document.getElementById('view-zollrecht-quiz').classList.remove('hidden'); }
+        function openZollOverviewMenu() { hideAllViews(); document.getElementById('view-zollrecht-overview').classList.remove('hidden'); loadOverviewPdfs('zollrecht'); }
+        function toggleSound() { soundEnabled = !soundEnabled; document.getElementById('sound-toggle').textContent = soundEnabled ? '🔊' : '🔇'; }
     </script>
 </body>
 </html>
