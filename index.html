@@ -21,20 +21,12 @@
         .animate-view {
             animation: fadeSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        .progress-fill {
-            transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        .dragging {
+            opacity: 0.4;
+            background: #1e293b !important;
         }
-        ::-webkit-scrollbar {
-            height: 5px;
-            width: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.6);
-            border-radius: 999px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 999px;
+        .drag-over {
+            border: 2px dashed #6366f1 !important;
         }
     </style>
 </head>
@@ -145,87 +137,27 @@
             </div>
         </main>
 
-        <!-- ==================== ANSICHT 1B: RSS & AUSLÄNDERRECHT MENÜ ==================== -->
-        <section id="view-rss" class="hidden flex-1 flex flex-col pb-8 animate-view">
-            <div class="flex items-center justify-between mb-6">
+        <!-- ==================== ANSICHT 1B: RSS & AUSLÄNDERRECHT -> ÜBERSICHT ==================== -->
+        <section id="view-rss-overview" class="hidden flex-1 flex flex-col pb-8 animate-view">
+            <div class="flex items-center justify-between mb-5">
                 <button onclick="goHome()"
                     class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
                     ← Startseite
                 </button>
-                <span class="text-sm font-extrabold text-blue-300 tracking-tight">RSS &amp; Ausländerrecht</span>
+                <span class="text-sm font-extrabold text-blue-300 tracking-tight">RSS &amp; Ausländerrecht · Übersicht</span>
             </div>
-
-            <div class="flex-1 flex flex-col justify-center space-y-4 pb-10">
-                <button onclick="openRssQuizMenu()"
-                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-blue-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-2xl shrink-0">
-                            🧠
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white group-hover:text-blue-300 transition">
-                                Quiz
-                            </h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Fragen &amp; Fälle üben</p>
-                        </div>
-                    </div>
-                    <span class="text-slate-500 group-hover:text-blue-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
-                </button>
-
-                <button onclick="openRssOverviewMenu()"
-                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-blue-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-2xl shrink-0">
-                            📚
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white group-hover:text-blue-300 transition">
-                                Übersicht
-                            </h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Lernmaterial &amp; PDFs</p>
-                        </div>
-                    </div>
-                    <span class="text-slate-500 group-hover:text-blue-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- ==================== ANSICHT 1C: RSS & AUSLÄNDERRECHT -> QUIZ ==================== -->
-        <section id="view-rss-quiz" class="hidden flex-1 flex flex-col pb-8 animate-view">
-            <div class="flex items-center justify-between mb-4">
-                <button onclick="backToRss()"
-                    class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
-                    ← RSS &amp; Ausländerrecht
-                </button>
-                <span class="text-sm font-extrabold text-blue-300 tracking-tight">RSS · Quiz</span>
-            </div>
-            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 text-center shadow-lg my-auto">
-                <div class="text-3xl mb-2">🚧</div>
-                <h3 class="font-bold text-sm text-white mb-1">Bald verfügbar</h3>
-                <p class="text-xs text-slate-400">Hier entstehen demzufolge die Quiz-Fragen für RSS &amp; Ausländerrecht.</p>
-            </div>
-        </section>
-
-        <!-- ==================== ANSICHT 1D: RSS & AUSLÄNDERRECHT -> ÜBERSICHT ==================== -->
-        <section id="view-rss-overview" class="hidden flex-1 flex flex-col pb-8 animate-view">
-            <div class="flex items-center justify-between mb-5">
-                <button onclick="backToRss()"
-                    class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
-                    ← RSS &amp; Ausländerrecht
-                </button>
-                <span class="text-sm font-extrabold text-blue-300 tracking-tight">RSS · Übersicht</span>
-            </div>
-
-            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl mb-4">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">PDF Dokumente &amp; Lernmaterial</h3>
-                <div class="flex items-center gap-2">
-                    <input type="file" id="pdf-upload-rss" accept="application/pdf" class="hidden" onchange="handlePdfUpload('rss', this)">
-                    <label for="pdf-upload-rss" class="flex-1 py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs text-center cursor-pointer shadow-md transition active:scale-[0.99]">
-                        📂 PDF hochladen
+            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-bold text-sm text-white flex items-center gap-2">📁 PDF Dokumente <span class="text-[10px] text-slate-400 font-normal">(Greifen &amp; Verschieben)</span></h3>
+                    <label class="cursor-pointer bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition shadow-md shadow-blue-600/20">
+                        + PDF hochladen
+                        <input type="file" accept="application/pdf" class="hidden" onchange="handlePdfUpload('rss', this)">
                     </label>
                 </div>
+                <div id="pdf-list-rss" class="space-y-2">
+                    <p class="text-xs text-slate-500 italic text-center py-2">Noch keine PDFs hochgeladen.</p>
+                </div>
             </div>
-            <div id="pdf-list-rss" class="space-y-2.5"></div>
         </section>
 
         <!-- ==================== ANSICHT 2: VOLLZUGSRECHT MENÜ ==================== -->
@@ -265,7 +197,7 @@
                             <h2 class="font-bold text-lg text-white group-hover:text-emerald-300 transition">
                                 Übersicht
                             </h2>
-                            <p class="text-xs text-slate-400 mt-0.5">RDA, Befugnisse &amp; PDFs</p>
+                            <p class="text-xs text-slate-400 mt-0.5">Definitionen, RDA, Befugnisse &amp; Eigene PDFs</p>
                         </div>
                     </div>
                     <span class="text-slate-500 group-hover:text-emerald-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
@@ -301,15 +233,9 @@
             </div>
 
             <button onclick="startVollzugMixedQuiz()"
-                class="w-full mb-3 py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-lg shadow-emerald-600/25 flex items-center justify-between active:scale-[0.99] transition">
+                class="w-full mb-5 py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-lg shadow-emerald-600/25 flex items-center justify-between active:scale-[0.99] transition">
                 <span>🎲 Alle Vollzugsrecht-Fragen gemischt</span>
-                <span id="vollzug-count-badge" class="bg-white/20 px-2.5 py-0.5 rounded-full text-xs">Fragen</span>
-            </button>
-
-            <button onclick="startVollzugRdaQuiz()"
-                class="w-full mb-5 py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm bg-slate-900 hover:bg-slate-800 text-white border border-slate-800 hover:border-emerald-500/40 shadow-lg flex items-center justify-between active:scale-[0.99] transition">
-                <span>🛡️ RDA – Rechtmäßige Dienstausübung</span>
-                <span id="vollzug-rda-topic-count" class="bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full text-xs border border-emerald-500/30">Fragen</span>
+                <span id="vollzug-count-badge" class="bg-white/20 px-2.5 py-0.5 rounded-full text-xs">20 Fragen</span>
             </button>
         </section>
 
@@ -323,19 +249,53 @@
                 <span class="text-sm font-extrabold text-emerald-300 tracking-tight">Vollzugsrecht · Übersicht</span>
             </div>
 
-            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl mb-4">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">PDF Dokumente &amp; Lernmaterial</h3>
-                <div class="flex items-center gap-2">
-                    <input type="file" id="pdf-upload-vollzug" accept="application/pdf" class="hidden" onchange="handlePdfUpload('vollzug', this)">
-                    <label for="pdf-upload-vollzug" class="flex-1 py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs text-center cursor-pointer shadow-md transition active:scale-[0.99]">
-                        📂 PDF hochladen
+            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl mb-4 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-bold text-sm text-white flex items-center gap-2">📁 PDF Dokumente <span class="text-[10px] text-slate-400 font-normal">(Greifen &amp; Verschieben)</span></h3>
+                    <label class="cursor-pointer bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition shadow-md shadow-emerald-600/20">
+                        + PDF hochladen
+                        <input type="file" accept="application/pdf" class="hidden" onchange="handlePdfUpload('vollzug', this)">
                     </label>
                 </div>
+                <div id="pdf-list-vollzug" class="space-y-2">
+                    <p class="text-xs text-slate-500 italic text-center py-2">Noch keine PDFs hochgeladen.</p>
+                </div>
             </div>
-            <div id="pdf-list-vollzug" class="space-y-2.5 mb-4"></div>
+
+            <div class="space-y-3">
+                <div class="bg-slate-900/95 border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
+                    <button type="button" onclick="toggleOverviewPanel('v-def-content', 'v-def-chevron')"
+                        class="w-full p-4 flex items-center justify-between text-left hover:bg-slate-800/60 transition active:scale-[0.99]">
+                        <div class="flex items-center gap-2.5">
+                            <span class="text-base">🛡️</span>
+                            <h4 class="font-extrabold text-sm sm:text-base text-white">Definitionen</h4>
+                            <span class="text-[10px] font-semibold uppercase tracking-wider text-emerald-300 bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 rounded-md">Übersicht</span>
+                        </div>
+                        <span id="v-def-chevron" class="text-slate-400 text-xs font-bold transition-transform duration-200">▼</span>
+                    </button>
+                    <div id="v-def-content" class="hidden px-4 pb-4 pt-1 border-t border-slate-800/80">
+                        <div class="overflow-x-auto rounded-xl border border-slate-700/80 mt-2">
+                            <table class="w-full min-w-[460px] border-collapse text-xs text-left">
+                                <tbody>
+                                    <tr class="border-b border-slate-700/80 bg-slate-900/60">
+                                        <td class="p-2.5 border-r border-slate-700/80 font-bold text-emerald-300 align-top w-[26%]">Aufgaben VZB der Zollverwaltung</td>
+                                        <td class="p-2.5 border-r border-slate-700/80 font-bold text-white align-top w-[30%]">ZollVG, BPolG, PolGes</td>
+                                        <td class="p-2.5 text-slate-300 align-top w-[44%] space-y-1">
+                                            <div>1.) Steuerliche Aufgaben</div>
+                                            <div>2.) Bekämpfung Schwarzarbeit</div>
+                                            <div>3.) Andere Vollzugsaufgaben</div>
+                                            <div>4.) Verfolgung von Straftaten</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <!-- ==================== ANSICHT 2: ZOLLRECHT (QUIZ & ÜBERSICHT) ==================== -->
+        <!-- ==================== ANSICHT 2: ZOLLRECHT MENÜ ==================== -->
         <section id="view-zollrecht" class="hidden flex-1 flex flex-col pb-8 animate-view">
             <div class="flex items-center justify-between mb-6">
                 <button onclick="goHome()"
@@ -356,7 +316,7 @@
                             <h2 class="font-bold text-lg text-white group-hover:text-indigo-300 transition">
                                 Quiz
                             </h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Schwierigkeitsgrad, Themen mischen &amp; Einzelthemen</p>
+                            <p class="text-xs text-slate-400 mt-0.5">Schwierigkeitsgrad &amp; Themen mischen</p>
                         </div>
                     </div>
                     <span class="text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
@@ -372,7 +332,7 @@
                             <h2 class="font-bold text-lg text-white group-hover:text-emerald-300 transition">
                                 Übersicht
                             </h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Zollverfahren, Rechtsgrundlagen &amp; PDFs</p>
+                            <p class="text-xs text-slate-400 mt-0.5">Zollverfahren &amp; Eigene PDFs</p>
                         </div>
                     </div>
                     <span class="text-slate-500 group-hover:text-emerald-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
@@ -402,37 +362,7 @@
                         🔥 Schwer
                     </button>
                 </div>
-                <p id="mode-description" class="text-[11px] text-slate-400 mt-2.5 leading-relaxed">
-                    <strong>🟢 Einfach:</strong> Gezielte Abfrage der Rechtsgrundlagen („Wo ist … geregelt?“) mit 4 Zollrechts-Optionen.
-                </p>
             </div>
-
-            <button onclick="startMixedQuiz()"
-                class="w-full mb-3 py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white shadow-lg shadow-indigo-600/25 flex items-center justify-between active:scale-[0.99] transition">
-                <span>🎲 Alle Themen gemischt</span>
-                <span id="mixed-count-badge" class="bg-white/20 px-2.5 py-0.5 rounded-full text-xs">Fragen</span>
-            </button>
-
-            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl mb-5 overflow-hidden shadow-md">
-                <button type="button" onclick="toggleOverviewPanel('custom-mix-panel', 'custom-mix-chevron')"
-                    class="w-full p-3.5 flex items-center justify-between text-left hover:bg-slate-800/60 transition active:scale-[0.99]">
-                    <div class="flex items-center gap-2.5">
-                        <span class="text-base">🎯</span>
-                        <span class="font-bold text-xs sm:text-sm text-white">Eigene Themenauswahl mischen</span>
-                    </div>
-                    <span id="custom-mix-chevron" class="text-slate-400 text-xs font-bold transition-transform duration-200">▼</span>
-                </button>
-                <div id="custom-mix-panel" class="hidden px-3.5 pb-3.5 pt-1 border-t border-slate-800/80 space-y-2">
-                    <div id="custom-mix-checkboxes" class="space-y-1.5 pt-1"></div>
-                    <button type="button" onclick="startCustomMixedQuiz()"
-                        class="w-full mt-2 py-2.5 px-4 rounded-xl font-bold text-xs bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/20 active:scale-[0.99] transition">
-                        Ausgewählte Themen gemischt starten →
-                    </button>
-                </div>
-            </div>
-
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5 px-1">Einzelne Themen</h3>
-            <div id="blocks-container" class="space-y-2.5"></div>
         </section>
 
         <!-- ==================== ANSICHT 2C: ZOLLRECHT -> ÜBERSICHT ==================== -->
@@ -445,131 +375,67 @@
                 <span class="text-sm font-extrabold text-emerald-300 tracking-tight">Zollrecht · Übersicht</span>
             </div>
 
-            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl mb-4">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">PDF Dokumente &amp; Lernmaterial</h3>
-                <div class="flex items-center gap-2">
-                    <input type="file" id="pdf-upload-zollrecht" accept="application/pdf" class="hidden" onchange="handlePdfUpload('zollrecht', this)">
-                    <label for="pdf-upload-zollrecht" class="flex-1 py-2.5 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs text-center cursor-pointer shadow-md transition active:scale-[0.99]">
-                        📂 PDF hochladen
+            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl mb-4 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-bold text-sm text-white flex items-center gap-2">📁 PDF Dokumente <span class="text-[10px] text-slate-400 font-normal">(Greifen &amp; Verschieben)</span></h3>
+                    <label class="cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition shadow-md shadow-indigo-600/20">
+                        + PDF hochladen
+                        <input type="file" accept="application/pdf" class="hidden" onchange="handlePdfUpload('zoll', this)">
                     </label>
                 </div>
-            </div>
-            <div id="pdf-list-zollrecht" class="space-y-2.5 mb-4"></div>
-        </section>
-
-        <!-- ==================== ANSICHT 3: AKTIVES QUIZ ==================== -->
-        <section id="view-quiz" class="hidden flex-1 flex flex-col justify-between pb-6 animate-view">
-            <div>
-                <div class="flex items-center justify-between gap-2 mb-3">
-                    <button id="quiz-back-btn" onclick="openZollQuizMenu()"
-                        class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700/70 active:scale-95 transition shrink-0">
-                        ← Menü
-                    </button>
-
-                    <div class="flex items-center gap-1.5 min-w-0">
-                        <span id="quiz-mode-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
-                            🟢 Einfach
-                        </span>
-                        <span id="quiz-block-title" class="text-xs font-bold text-slate-300 truncate">Thema</span>
-                    </div>
-
-                    <span id="quiz-counter" class="text-xs font-bold text-slate-200 bg-slate-800/80 px-2.5 py-1.5 rounded-xl border border-slate-700/70 shrink-0">1 / 10</span>
-                </div>
-
-                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden mb-5 border border-slate-700/60">
-                    <div id="quiz-progress" class="progress-fill h-full bg-gradient-to-r from-indigo-500 to-blue-400 rounded-full" style="width: 0%"></div>
-                </div>
-
-                <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-4 shadow-lg">
-                    <div id="quiz-question-tag" class="text-[10px] font-bold uppercase tracking-wider text-indigo-400 mb-1.5">Rechtsgrundlage gesucht</div>
-                    <h2 id="quiz-question-text" class="text-base sm:text-lg font-bold text-white leading-snug">Wo ist … geregelt?</h2>
-                </div>
-
-                <div id="quiz-options" class="space-y-2.5"></div>
-
-                <div id="quiz-text-input-area" class="hidden space-y-3">
-                    <div class="bg-slate-900/95 border border-slate-700/80 rounded-2xl p-4 shadow-sm">
-                        <label for="free-text-answer" class="block text-xs font-semibold text-slate-400 mb-2">
-                            Vorschrift eintippen:
-                        </label>
-                        <input id="free-text-answer" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-                            placeholder="Artikel oder Paragraf eingeben…"
-                            onkeydown="if(event.key === 'Enter') handleFreeTextSubmit()"
-                            class="w-full bg-slate-950 border border-slate-700 focus:border-amber-500 focus:outline-none rounded-xl px-3.5 py-3 text-sm font-semibold text-white placeholder-slate-500 transition">
-                    </div>
-                    <button id="btn-submit-freetext" onclick="handleFreeTextSubmit()"
-                        class="w-full py-3.5 rounded-2xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-lg shadow-amber-500/20 active:scale-[0.99] transition">
-                        Antwort prüfen ✓
-                    </button>
+                <div id="pdf-list-zoll" class="space-y-2">
+                    <p class="text-xs text-slate-500 italic text-center py-2">Noch keine PDFs hochgeladen.</p>
                 </div>
             </div>
 
-            <div id="feedback-panel" class="hidden mt-5 rounded-2xl p-4 border animate-view shadow-xl">
-                <div class="flex items-start gap-3 mb-3">
-                    <span id="feedback-emoji" class="text-xl shrink-0">✅</span>
-                    <div>
-                        <h4 id="feedback-heading" class="font-bold text-sm">Richtig!</h4>
-                        <p id="feedback-text" class="text-xs sm:text-sm text-slate-200 mt-1 leading-relaxed">Erklärung...</p>
+            <div class="space-y-3">
+                <div class="bg-slate-900/95 border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
+                    <button type="button" onclick="toggleOverviewPanel('z-uw-content', 'z-uw-chevron')"
+                        class="w-full p-4 flex items-center justify-between text-left hover:bg-slate-800/60 transition active:scale-[0.99]">
+                        <div class="flex items-center gap-2.5">
+                            <span class="text-base">🇪🇺</span>
+                            <h4 class="font-extrabold text-sm sm:text-base text-white">Unionsware &amp; Nicht-Unionsware</h4>
+                            <span class="text-[10px] font-semibold uppercase tracking-wider text-indigo-300 bg-indigo-500/15 border border-indigo-500/30 px-2 py-0.5 rounded-md">Übersicht</span>
+                        </div>
+                        <span id="z-uw-chevron" class="text-slate-400 text-xs font-bold transition-transform duration-200">▼</span>
+                    </button>
+                    <div id="z-uw-content" class="hidden px-4 pb-4 pt-1 border-t border-slate-800/80">
+                        <div class="overflow-x-auto rounded-xl border border-slate-700/80 mt-2">
+                            <table class="w-full min-w-[440px] border-collapse text-xs text-left">
+                                <tbody>
+                                    <tr class="border-b border-slate-700/80 bg-slate-900/60">
+                                        <td class="p-2.5 border-r border-slate-700/80 text-slate-200 align-top w-[28%]">Einfuhrabgaben</td>
+                                        <td class="p-2.5 border-r border-slate-700/80 font-bold text-white align-top w-[30%]">§ 1 (1) S. 3 ZollVG</td>
+                                        <td class="p-2.5 italic text-slate-300 align-top w-[42%]"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <button id="btn-next-question" onclick="nextQuestion()"
-                    class="w-full py-3 rounded-xl font-bold text-sm bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 active:scale-[0.99] transition">
-                    Nächste Frage →
-                </button>
-            </div>
-        </section>
-
-        <!-- ==================== ANSICHT 4: AUSWERTUNG ==================== -->
-        <section id="view-result" class="hidden flex-1 flex flex-col items-center justify-center pb-8 animate-view">
-            <div class="w-full bg-slate-900/95 border border-slate-800 rounded-3xl p-6 text-center shadow-2xl">
-                <div id="result-emoji" class="text-5xl mb-3">🏆</div>
-                <h2 id="result-headline" class="text-xl font-extrabold text-white mb-1">Runde abgeschlossen!</h2>
-                <p id="result-subline" class="text-xs sm:text-sm text-slate-400 mb-6">Hier ist dein Ergebnis für diese Lerneinheit.</p>
-
-                <div class="bg-slate-800/80 border border-slate-700/70 rounded-2xl p-4 mb-6">
-                    <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Ergebnis</div>
-                    <div id="result-score-text" class="text-2xl font-extrabold text-emerald-400">0 von 0 richtig</div>
-                    <div id="result-percent-text" class="text-xs font-semibold text-indigo-300 mt-1">0 % Trefferquote</div>
-                </div>
-
-                <div id="result-mistakes-container" class="hidden text-left mb-6">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-rose-300 mb-2.5 px-1">❌ Falsch beantwortet</h3>
-                    <div id="result-mistakes-list" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
-                </div>
-
-                <div class="space-y-3">
-                    <button onclick="if(lastQuizTrigger) lastQuizTrigger(); else goHome();"
-                        class="w-full py-3.5 rounded-2xl font-bold text-sm bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white shadow-lg shadow-indigo-600/25 active:scale-[0.99] transition">
-                        🔄 Nochmal üben
-                    </button>
-                    <button onclick="goHome()"
-                        class="w-full py-3.5 rounded-2xl font-bold text-sm bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 active:scale-[0.99] transition">
-                        ← Zurück zur Startseite
-                    </button>
                 </div>
             </div>
         </section>
 
-    </div>
-
-    <!-- ==================== PDF VIEWER MODAL (1:1 CANVAS) ==================== -->
-    <div id="pdf-viewer-modal" class="hidden fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-sm flex flex-col p-4 animate-view">
-        <div class="flex items-center justify-between mb-3 bg-slate-900 border border-slate-800 rounded-2xl px-4 py-3 shadow-lg">
-            <h3 id="pdf-modal-title" class="text-xs sm:text-sm font-extrabold text-white truncate max-w-[200px] sm:max-w-md">Dokument</h3>
-            <div class="flex items-center gap-2">
-                <button onclick="prevPdfPage()" class="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold text-slate-200 hover:bg-slate-700">←</button>
-                <span id="pdf-page-indicator" class="text-xs font-bold text-slate-300">Seite 1 / 1</span>
-                <button onclick="nextPdfPage()" class="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold text-slate-200 hover:bg-slate-700">→</button>
-                <button onclick="closePdfViewer()" class="ml-2 w-8 h-8 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-300 font-bold text-sm">✕</button>
+        <!-- ==================== MODAL: 1:1 PDF VIEWER (CANVAS) ==================== -->
+        <div id="pdf-viewer-modal" class="hidden fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex flex-col p-4">
+            <div class="flex items-center justify-between bg-slate-900 border border-slate-800 rounded-2xl px-4 py-3 mb-3 shadow-lg">
+                <span id="pdf-viewer-title" class="font-bold text-sm text-white truncate max-w-[200px] sm:max-w-md">Dokument</span>
+                <div class="flex items-center gap-2">
+                    <button onclick="changePdfPage(-1)" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-700">←</button>
+                    <span id="pdf-page-indicator" class="text-xs text-slate-300">1 / 1</span>
+                    <button onclick="changePdfPage(1)" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-700">→</button>
+                    <button onclick="closePdfViewer()" class="bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 text-xs font-bold px-3 py-1.5 rounded-xl ml-2">✕ Schließen</button>
+                </div>
+            </div>
+            <div class="flex-1 overflow-auto bg-slate-900/50 border border-slate-800 rounded-2xl p-4 flex items-center justify-center">
+                <canvas id="pdf-canvas" class="shadow-2xl max-w-full rounded-lg"></canvas>
             </div>
         </div>
-        <div class="flex-1 overflow-auto bg-slate-950 border border-slate-800 rounded-2xl flex items-center justify-center p-4">
-            <canvas id="pdf-canvas" class="max-w-full shadow-2xl rounded-lg"></canvas>
-        </div>
+
     </div>
 
     <script>
-        // ==================== SUPABASE 1-GERÄT-ZUGANGSSPERRE & CONTENT-ABRUF ====================
+        // ==================== SUPABASE 1-GERÄT-ZUGANGSSPERRE ====================
         const SUPABASE_URL = 'https://qetnzemgradebzqwhfut.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_FA9Miksbe1RSBi2MmtasTw_Bi6_5AZB';
         const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -594,19 +460,12 @@
             allSourcesPool = zollBlocks.flatMap(b => b.items.map(i => i.source));
             vollzugSourcesPool = vollzugQuizItems.map(i => i.source);
 
-            const vzBadge = document.getElementById('vollzug-count-badge');
-            if (vzBadge) vzBadge.textContent = `${vollzugQuizItems.length} Fragen`;
-            const vzTopicBadge = document.getElementById('vollzug-rda-topic-count');
-            if (vzTopicBadge) vzTopicBadge.textContent = `${vollzugQuizItems.length} Fragen`;
-            const vzSub = document.getElementById('vollzug-menu-subtitle');
-            if (vzSub) vzSub.textContent = `${vollzugQuizItems.length} RDA-Fragen & Paragrafenketten üben`;
-
             document.getElementById('auth-gate').classList.add('hidden');
             document.getElementById('app').classList.remove('hidden');
 
             loadOverviewPdfs('rss');
             loadOverviewPdfs('vollzug');
-            loadOverviewPdfs('zollrecht');
+            loadOverviewPdfs('zoll');
         }
 
         function showAuthError(msg) {
@@ -620,724 +479,310 @@
             const deviceId = getOrCreateDeviceId();
             if (!savedCode) return;
 
-            const btn = document.getElementById('btn-verify-code');
-            if (btn) {
-                btn.disabled = true;
-                btn.textContent = 'Sitzung wird geprüft…';
-            }
-
             try {
-                const { data, error } = await sbClient.rpc('get_protected_content', {
-                    p_code: savedCode,
-                    p_device_id: deviceId
-                });
-
-                if (!error && data && data.status === 'ok' && data.content) {
+                const { data } = await sbClient.rpc('get_protected_content', { p_code: savedCode, p_device_id: deviceId });
+                if (data && data.status === 'ok' && data.content) {
                     hydrateAndUnlockApp(data.content);
                 } else {
                     localStorage.removeItem('zoll_app_saved_code');
-                    if (data && data.status === 'wrong_device') {
-                        showAuthError('Zugriff verweigert: Code ist auf einem anderen Gerät aktiv.');
-                    }
                 }
-            } catch (e) {
-                showAuthError('Verbindung zum Server fehlgeschlagen. Bitte Internetverbindung prüfen.');
-            } finally {
-                if (btn) {
-                    btn.disabled = false;
-                    btn.textContent = 'Zugang freischalten →';
-                }
-            }
+            } catch (e) {}
         }
 
         async function verifyAccessCode() {
             const input = document.getElementById('access-code-input');
-            const btn = document.getElementById('btn-verify-code');
-            const errorBox = document.getElementById('auth-error-box');
             const code = input.value.trim().toUpperCase();
-
-            errorBox.classList.add('hidden');
-            if (!code) {
-                showAuthError('Bitte gib zuerst einen Zugangscode ein.');
-                input.focus();
-                return;
-            }
-
-            btn.disabled = true;
-            btn.textContent = 'Wird geprüft…';
+            if (!code) return showAuthError('Bitte gib einen Code ein.');
             const deviceId = getOrCreateDeviceId();
 
             try {
-                const { data, error } = await sbClient.rpc('get_protected_content', {
-                    p_code: code,
-                    p_device_id: deviceId
-                });
-
-                if (error || !data) {
-                    showAuthError('Verbindungsfehler beim Prüfen des Zugangscodes.');
-                } else if (data.status === 'invalid_code') {
-                    showAuthError('Ungültiger Zugangscode.');
-                } else if (data.status === 'wrong_device') {
-                    showAuthError('Zugriff verweigert: Bereits auf anderem Gerät aktiviert.');
-                } else if (data.status === 'ok' && data.content) {
+                const { data } = await sbClient.rpc('get_protected_content', { p_code: code, p_device_id: deviceId });
+                if (data && data.status === 'ok' && data.content) {
                     localStorage.setItem('zoll_app_saved_code', code);
                     hydrateAndUnlockApp(data.content);
                 } else {
-                    showAuthError('Inhalte konnten nicht geladen werden.');
+                    showAuthError(data?.status === 'wrong_device' ? 'Bereits auf anderem Gerät aktiv.' : 'Ungültiger Code.');
                 }
             } catch (err) {
-                showAuthError('Netzwerkfehler beim Prüfen des Codes.');
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Zugang freischalten →';
+                showAuthError('Netzwerkfehler.');
             }
         }
 
         window.addEventListener('DOMContentLoaded', checkExistingSession);
 
-        // ==================== PDF UPLOAD & SUPABASE STORAGE LOGIK ====================
-        async function handlePdfUpload(topic, inputElement) {
-            const file = inputElement.files[0];
-            if (!file) return;
-            if (file.type !== 'application/pdf') {
-                alert('Bitte nur PDF-Dateien hochladen.');
-                return;
-            }
-
-            const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9_.-]/g, '_')}`;
-            const filePath = `${topic}/${fileName}`;
-
+        // ==================== AKTIVITÄTS-LOGGING (IM HINTERGRUND) ====================
+        async function logActivity(action, fileName) {
             try {
-                const { error: uploadError } = await sbClient.storage
-                    .from('overview-pdfs')
-                    .upload(filePath, file);
+                const userCode = localStorage.getItem('zoll_app_saved_code');
+                let displayName = userCode || 'Unbekannt';
 
-                if (uploadError) {
-                    alert('Fehler beim Hochladen der PDF: ' + uploadError.message);
-                    return;
-                }
+                if (userCode) {
+                    const { data, error } = await sbClient
+                        .from('access_codes')
+                        .select('name')
+                        .eq('code', userCode)
+                        .single();
 
-                const { data: urlData } = sbClient.storage
-                    .from('overview-pdfs')
-                    .getPublicUrl(filePath);
-
-                const publicUrl = urlData.publicUrl;
-
-                const { error: dbError } = await sbClient
-                    .from('overview_documents')
-                    .insert([{
-                        topic: topic,
-                        file_name: file.name,
-                        display_name: file.name.replace(/\.[^/.]+$/, ""),
-                        file_url: publicUrl
-                    }]);
-
-                if (dbError) {
-                    alert('Fehler beim Speichern in der Datenbank: ' + dbError.message);
-                    return;
-                }
-
-                inputElement.value = '';
-                loadOverviewPdfs(topic);
-            } catch (err) {
-                alert('Unerwarteter Fehler beim Upload.');
-            }
-        }
-
-        async function loadOverviewPdfs(topic) {
-            const listContainerId = topic === 'rss' ? 'pdf-list-rss' : (topic === 'vollzug' ? 'pdf-list-vollzug' : 'pdf-list-zollrecht');
-            const container = document.getElementById(listContainerId);
-            if (!container) return;
-
-            const { data, error } = await sbClient
-                .from('overview_documents')
-                .select('*')
-                .eq('topic', topic)
-                .order('created_at', { ascending: false });
-
-            if (error || !data) {
-                container.innerHTML = '<p class="text-xs text-slate-500 italic px-1">Fehler beim Laden der Dokumente.</p>';
-                return;
-            }
-
-            if (data.length === 0) {
-                container.innerHTML = '<p class="text-xs text-slate-500 italic px-1">Noch keine PDFs hochgeladen.</p>';
-                return;
-            }
-
-            container.innerHTML = '';
-            data.forEach(doc => {
-                const item = document.createElement('div');
-                item.className = "bg-slate-900/90 border border-slate-800 rounded-2xl p-3 flex items-center justify-between gap-3 shadow-md";
-                item.innerHTML = `
-                    <div class="flex items-center gap-3 min-w-0 cursor-pointer flex-1" onclick="openPdfViewer('${doc.file_url}', '${doc.display_name}')">
-                        <div class="w-9 h-9 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-base shrink-0">📄</div>
-                        <div class="min-w-0">
-                            <h4 class="font-bold text-xs sm:text-sm text-white truncate">${doc.display_name}</h4>
-                            <span class="text-[10px] text-slate-400">PDF-Dokument (1:1 Ansicht)</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-1.5 shrink-0">
-                        <button onclick="promptRenameDoc('${doc.id}', '${doc.topic}', '${doc.display_name}')" title="Umbenennen" class="w-8 h-8 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white text-xs">✏️</button>
-                        <button onclick="deleteDoc('${doc.id}', '${doc.topic}')" title="Löschen" class="w-8 h-8 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-300 text-xs">🗑️</button>
-                    </div>
-                `;
-                container.appendChild(item);
-            });
-        }
-
-        async function promptRenameDoc(id, topic, currentName) {
-            const newName = prompt('Neuen Namen für das Dokument eingeben:', currentName);
-            if (!newName || !newName.trim()) return;
-
-            const { error } = await sbClient
-                .from('overview_documents')
-                .update({ display_name: newName.trim() })
-                .eq('id', id);
-
-            if (!error) {
-                loadOverviewPdfs(topic);
-            } else {
-                alert('Fehler beim Umbenennen.');
-            }
-        }
-
-        async function deleteDoc(id, topic) {
-            if (!confirm('Möchtest du dieses Dokument wirklich löschen?')) return;
-
-            const { error } = await sbClient
-                .from('overview_documents')
-                .delete()
-                .eq('id', id);
-
-            if (!error) {
-                loadOverviewPdfs(topic);
-            } else {
-                alert('Fehler beim Löschen.');
-            }
-        }
-
-        // ==================== 1:1 PDF.JS CANVAS VIEWER ====================
-        let pdfDoc = null;
-        let pageNum = 1;
-        let pageRendering = false;
-        let pageNumPending = null;
-        let scale = 1.3;
-        let currentPdfTitle = '';
-
-        async function openPdfViewer(url, title) {
-            currentPdfTitle = title;
-            document.getElementById('pdf-modal-title').textContent = title;
-            document.getElementById('pdf-viewer-modal').classList.remove('hidden');
-
-            try {
-                const loadingTask = pdfjsLib.getDocument(url);
-                pdfDoc = await loadingTask.promise;
-                pageNum = 1;
-                renderPage(pageNum);
-            } catch (err) {
-                alert('PDF konnte nicht geladen werden.');
-                closePdfViewer();
-            }
-        }
-
-        function renderPage(num) {
-            pageRendering = true;
-            pdfDoc.getPage(num).then(function(page) {
-                const canvas = document.getElementById('pdf-canvas');
-                const ctx = canvas.getContext('2d');
-                const viewport = page.getViewport({ scale: scale });
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-
-                const renderContext = {
-                    canvasContext: ctx,
-                    viewport: viewport
-                };
-                const renderTask = page.render(renderContext);
-
-                renderTask.promise.then(function() {
-                    pageRendering = false;
-                    if (pageNumPending !== null) {
-                        renderPage(pageNumPending);
-                        pageNumPending = null;
+                    if (!error && data && data.name) {
+                        displayName = data.name;
                     }
-                });
-            });
+                }
 
-            document.getElementById('pdf-page-indicator').textContent = `Seite ${num} / ${pdfDoc.numPages}`;
-        }
-
-        function queueRenderPage(num) {
-            if (pageRendering) {
-                pageNumPending = num;
-            } else {
-                renderPage(num);
+                await sbClient.from('upload_logs').insert([{
+                    user_email: displayName,
+                    action: action,
+                    file_name: fileName
+                }]);
+            } catch (err) {
+                console.error('Fehler beim Protokollieren:', err);
             }
         }
 
-        function prevPdfPage() {
-            if (!pdfDoc || pageNum <= 1) return;
-            pageNum--;
-            queueRenderPage(pageNum);
-        }
-
-        function nextPdfPage() {
-            if (!pdfDoc || pageNum >= pdfDoc.numPages) return;
-            pageNum++;
-            queueRenderPage(pageNum);
-        }
-
-        function closePdfViewer() {
-            document.getElementById('pdf-viewer-modal').classList.add('hidden');
-            pdfDoc = null;
-        }
-
-        // ==================== APP LOGIK ====================
-        let currentMode = 'easy';
-        let currentVollzugMode = 'easy';
+        // ==================== APP LOGIK & PDF / CANVAS MANAGEMENT ====================
         let soundEnabled = true;
         let audioCtx = null;
-        let activeQuizItems = [];
-        let activeQuizTitle = '';
-        let currentIndex = 0;
-        let correctCount = 0;
-        let wrongAnswersLog = [];
-        let answeredCurrent = false;
-        let lastQuizTrigger = null;
-        let activeQuizOrigin = 'zoll';
-
-        function playFeedbackTone(type) {
-            if (!soundEnabled) return;
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-                const now = audioCtx.currentTime;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                if (type === 'correct') {
-                    osc.frequency.setValueAtTime(587.33, now);
-                    osc.frequency.setValueAtTime(880, now + 0.08);
-                    gain.gain.setValueAtTime(0.08, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
-                } else {
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(220, now);
-                    osc.frequency.setValueAtTime(174.61, now + 0.1);
-                    gain.gain.setValueAtTime(0.09, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
-                }
-                osc.start(now);
-                osc.stop(now + 0.28);
-            } catch (e) {}
-        }
 
         function toggleSound() {
             soundEnabled = !soundEnabled;
             document.getElementById('sound-toggle').textContent = soundEnabled ? '🔊' : '🔇';
         }
 
-        function fisherYatesShuffle(array) {
-            const copy = [...array];
-            for (let i = copy.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [copy[i], copy[j]] = [copy[j], copy[i]];
-            }
-            return copy;
-        }
-
         function hideAllViews() {
-            document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-rss').classList.add('hidden');
-            document.getElementById('view-rss-quiz').classList.add('hidden');
-            document.getElementById('view-rss-overview').classList.add('hidden');
-            document.getElementById('view-vollzug').classList.add('hidden');
-            document.getElementById('view-vollzug-quiz').classList.add('hidden');
-            document.getElementById('view-vollzug-overview').classList.add('hidden');
-            document.getElementById('view-zollrecht').classList.add('hidden');
-            document.getElementById('view-zollrecht-quiz').classList.add('hidden');
-            document.getElementById('view-zollrecht-overview').classList.add('hidden');
-            document.getElementById('view-quiz').classList.add('hidden');
-            document.getElementById('view-result').classList.add('hidden');
+            ['view-home', 'view-rss-overview', 'view-vollzug', 'view-vollzug-quiz', 'view-vollzug-overview', 'view-zollrecht', 'view-zollrecht-quiz', 'view-zollrecht-overview'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
         }
 
-        function goHome() {
-            hideAllViews();
-            document.getElementById('view-home').classList.remove('hidden');
-        }
-
+        function goHome() { hideAllViews(); document.getElementById('view-home').classList.remove('hidden'); }
         function openMainTopic(topicKey) {
             hideAllViews();
-            if (topicKey === 'rss') {
-                document.getElementById('view-rss').classList.remove('hidden');
-            } else if (topicKey === 'vollzug') {
-                document.getElementById('view-vollzug').classList.remove('hidden');
-            } else if (topicKey === 'zollrecht') {
-                document.getElementById('view-zollrecht').classList.remove('hidden');
-            }
+            if (topicKey === 'rss') document.getElementById('view-rss-overview').classList.remove('hidden');
+            else if (topicKey === 'vollzug') document.getElementById('view-vollzug').classList.remove('hidden');
+            else if (topicKey === 'zollrecht') document.getElementById('view-zollrecht').classList.remove('hidden');
         }
-
-        function backToRss() {
-            hideAllViews();
-            document.getElementById('view-rss').classList.remove('hidden');
-        }
-
-        function openRssQuizMenu() {
-            hideAllViews();
-            document.getElementById('view-rss-quiz').classList.remove('hidden');
-        }
-
-        function openRssOverviewMenu() {
-            hideAllViews();
-            document.getElementById('view-rss-overview').classList.remove('hidden');
-            loadOverviewPdfs('rss');
-        }
-
-        function backToVollzugsrecht() {
-            hideAllViews();
-            document.getElementById('view-vollzug').classList.remove('hidden');
-        }
-
-        function openVollzugQuizMenu() {
-            hideAllViews();
-            document.getElementById('view-vollzug-quiz').classList.remove('hidden');
-        }
-
-        function openVollzugOverviewMenu() {
-            hideAllViews();
-            document.getElementById('view-vollzug-overview').classList.remove('hidden');
-            loadOverviewPdfs('vollzug');
-        }
-
-        function backToZollrecht() {
-            hideAllViews();
-            document.getElementById('view-zollrecht').classList.remove('hidden');
-        }
-
-        function openZollQuizMenu() {
-            hideAllViews();
-            renderZollrechtBlocks();
-            document.getElementById('view-zollrecht-quiz').classList.remove('hidden');
-        }
-
-        function openZollOverviewMenu() {
-            hideAllViews();
-            document.getElementById('view-zollrecht-overview').classList.remove('hidden');
-            loadOverviewPdfs('zollrecht');
-        }
+        function backToVollzugsrecht() { hideAllViews(); document.getElementById('view-vollzug').classList.remove('hidden'); }
+        function openVollzugQuizMenu() { hideAllViews(); document.getElementById('view-vollzug-quiz').classList.remove('hidden'); }
+        function openVollzugOverviewMenu() { hideAllViews(); document.getElementById('view-vollzug-overview').classList.remove('hidden'); }
+        function backToZollrecht() { hideAllViews(); document.getElementById('view-zollrecht').classList.remove('hidden'); }
+        function openZollQuizMenu() { hideAllViews(); document.getElementById('view-zollrecht-quiz').classList.remove('hidden'); }
+        function openZollOverviewMenu() { hideAllViews(); document.getElementById('view-zollrecht-overview').classList.remove('hidden'); }
 
         function toggleOverviewPanel(contentId, chevronId) {
             const content = document.getElementById(contentId);
             const chevron = document.getElementById(chevronId);
-            const isHidden = content.classList.contains('hidden');
-            if (isHidden) {
-                content.classList.remove('hidden');
-                chevron.style.transform = 'rotate(180deg)';
-            } else {
-                content.classList.add('hidden');
-                chevron.style.transform = 'rotate(0deg)';
+            content.classList.toggle('hidden');
+            chevron.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        // ==================== LOCAL STORAGE SORTIERUNG & DRAG AND DROP ====================
+        function getCustomOrder(topic) {
+            try {
+                return JSON.parse(localStorage.getItem(`pdf_order_${topic}`)) || [];
+            } catch (e) {
+                return [];
             }
         }
 
-        function setMode(mode) {
-            currentMode = mode;
-            const easyBtn = document.getElementById('btn-mode-easy');
-            const hardBtn = document.getElementById('btn-mode-hard');
-            const desc = document.getElementById('mode-description');
+        function saveCustomOrder(topic, ids) {
+            try {
+                localStorage.setItem(`pdf_order_${topic}`, JSON.stringify(ids));
+            } catch (e) {}
+        }
 
-            if (mode === 'easy') {
-                easyBtn.className = "py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 bg-emerald-500/15 border-emerald-500 text-emerald-300 shadow-sm";
-                hardBtn.className = "py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 bg-slate-800/70 border-slate-700 text-slate-400 hover:text-white";
-                desc.innerHTML = "<strong>🟢 Einfach:</strong> Gezielte Abfrage der Rechtsgrundlagen („Wo ist … geregelt?“) mit 4 Optionen.";
-            } else {
-                hardBtn.className = "py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 bg-amber-500/15 border-amber-500 text-amber-300 shadow-sm";
-                easyBtn.className = "py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 bg-slate-800/70 border-slate-700 text-slate-400 hover:text-white";
-                desc.innerHTML = "<strong>🔥 Schwer:</strong> Reines Freitext-Training – Vorschrift selbst eintippen.";
+        async function handlePdfUpload(topic, inputEl) {
+            const file = inputEl.files[0];
+            if (!file) return;
+
+            const fileName = file.name;
+            const filePath = `${topic}/${Date.now()}_${fileName}`;
+
+            try {
+                const { error: uploadError } = await sbClient.storage.from('overview-pdfs').upload(filePath, file);
+                if (uploadError) {
+                    alert('Fehler beim Upload: ' + uploadError.message);
+                    return;
+                }
+
+                const { data: urlData } = sbClient.storage.from('overview-pdfs').getPublicUrl(filePath);
+
+                const { data: newDoc, error: dbError } = await sbClient.from('overview_documents').insert([{
+                    topic: topic,
+                    file_name: fileName,
+                    display_name: fileName.replace(/\.[^/.]+$/, ""),
+                    file_url: urlData.publicUrl
+                }]).select();
+
+                if (!dbError && newDoc && newDoc.length > 0) {
+                    const order = getCustomOrder(topic);
+                    order.push(newDoc[0].id);
+                    saveCustomOrder(topic, order);
+                }
+
+                await logActivity('UPLOAD', fileName);
+                loadOverviewPdfs(topic);
+            } catch (err) {
+                alert('Upload fehlgeschlagen.');
+            } finally {
+                inputEl.value = '';
             }
         }
 
-        function setVollzugMode(mode) {
-            currentVollzugMode = mode;
-            const easyBtn = document.getElementById('btn-vollzug-mode-easy');
-            const hardBtn = document.getElementById('btn-vollzug-mode-hard');
-            const desc = document.getElementById('vollzug-mode-description');
+        async function loadOverviewPdfs(topic) {
+            const listEl = document.getElementById(`pdf-list-${topic}`);
+            if (!listEl) return;
 
-            if (mode === 'easy') {
-                easyBtn.className = "py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 bg-emerald-500/15 border-emerald-500 text-emerald-300 shadow-sm";
-                hardBtn.className = "py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 bg-slate-800/70 border-slate-700 text-slate-400 hover:text-white";
-                desc.innerHTML = "<strong>🟢 Einfach:</strong> Gezielte Abfrage der Paragrafenketten mit Multiple-Choice-Optionen.";
-            } else {
-                hardBtn.className = "py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 bg-amber-500/15 border-amber-500 text-amber-300 shadow-sm";
-                easyBtn.className = "py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 bg-slate-800/70 border-slate-700 text-slate-400 hover:text-white";
-                desc.innerHTML = "<strong>🔥 Schwer:</strong> Freitext-Training für das Vollzugsrecht.";
+            const { data, error } = await sbClient.from('overview_documents').select('*').eq('topic', topic);
+            if (error || !data || data.length === 0) {
+                listEl.innerHTML = `<p class="text-xs text-slate-500 italic text-center py-2">Noch keine PDFs hochgeladen.</p>";
+                return;
             }
-        }
 
-        function renderZollrechtBlocks() {
-            const container = document.getElementById('blocks-container');
-            const checkboxContainer = document.getElementById('custom-mix-checkboxes');
-            container.innerHTML = '';
-            checkboxContainer.innerHTML = '';
-            let totalCount = 0;
+            // Sortierung anhand der im Browser gespeicherten Reihenfolge anwenden
+            let order = getCustomOrder(topic);
+            data.sort((a, b) => {
+                let idxA = order.indexOf(a.id);
+                let idxB = order.indexOf(b.id);
+                if (idxA === -1) idxA = 9999;
+                if (idxB === -1) idxB = 9999;
+                return idxA - idxB;
+            });
 
-            zollBlocks.forEach((block, idx) => {
-                totalCount += block.items.length;
-                const label = document.createElement('label');
-                label.className = "flex items-center justify-between gap-2 bg-slate-800/60 hover:bg-slate-800 px-3 py-2 rounded-xl border border-slate-700/60 cursor-pointer transition";
-                label.innerHTML = `
-                    <div class="flex items-center gap-2.5 min-w-0">
-                        <input type="checkbox" value="${idx}" class="custom-topic-cb w-4 h-4 rounded accent-indigo-500">
-                        <span class="text-xs font-medium text-slate-200 truncate">${block.icon} ${block.title}</span>
-                    </div>
-                    <span class="text-[11px] text-slate-400 shrink-0">${block.items.length}</span>
-                `;
-                checkboxContainer.appendChild(label);
+            listEl.innerHTML = '';
+            data.forEach((doc, index) => {
+                const item = document.createElement('div');
+                item.className = "flex items-center justify-between bg-slate-800/80 border border-slate-700/60 rounded-xl p-3 gap-2 cursor-grab active:cursor-grabbing hover:border-indigo-500/50 transition";
+                item.draggable = true;
+                item.dataset.id = doc.id;
+                item.dataset.topic = topic;
 
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-indigo-500/40 rounded-2xl p-3.5 transition-all duration-150 active:scale-[0.99] flex items-center justify-between gap-3 shadow-md";
-                btn.onclick = () => startBlockQuiz(idx);
-                btn.innerHTML = `
-                    <div class="flex items-center gap-3 min-w-0">
-                        <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700/80 flex items-center justify-center text-lg shrink-0">${block.icon}</div>
-                        <div class="min-w-0">
-                            <h4 class="font-bold text-sm text-white group-hover:text-indigo-300 transition truncate">${block.title}</h4>
-                            <span class="text-[11px] text-slate-400">${block.items.length} Fragen</span>
+                item.innerHTML = `
+                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                        <span class="text-slate-500 text-sm shrink-0 select-none">☰</span>
+                        <div class="flex items-center gap-2.5 min-w-0 cursor-pointer flex-1" onclick="openPdfViewer('${doc.file_url}', '${doc.display_name}')">
+                            <span class="text-base shrink-0">📄</span>
+                            <span class="text-xs font-bold text-white truncate">${doc.display_name}</span>
                         </div>
                     </div>
-                    <span class="text-slate-500 group-hover:text-indigo-300 transition text-base font-bold shrink-0">→</span>
+                    <div class="flex items-center gap-1.5 shrink-0" onclick="event.stopPropagation()">
+                        <button onclick="promptRenamePdf('${doc.id}', '${doc.topic}', '${doc.display_name}')" class="p-1.5 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs" title="Umbenennen">✏️</button>
+                        <button onclick="deletePdf('${doc.id}', '${doc.topic}', '${doc.display_name}')" class="p-1.5 rounded-lg bg-rose-950/60 hover:bg-rose-900 text-rose-300 text-xs" title="Löschen">🗑️</button>
+                    </div>
                 `;
-                container.appendChild(btn);
+
+                // Drag and Drop Event Listener für Desktop & Mobile Touch
+                item.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', doc.id);
+                    item.classList.add('dragging');
+                });
+
+                item.addEventListener('dragend', () => {
+                    item.classList.remove('dragging');
+                    document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+                });
+
+                item.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    const draggingEl = document.querySelector('.dragging');
+                    if (draggingEl && draggingEl !== item) {
+                        item.classList.add('drag-over');
+                    }
+                });
+
+                item.addEventListener('dragleave', () => {
+                    item.classList.remove('drag-over');
+                });
+
+                item.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    item.classList.remove('drag-over');
+                    const draggedId = e.dataTransfer.getData('text/plain');
+                    if (draggedId && draggedId !== doc.id) {
+                        reorderPdfsLocally(topic, draggedId, doc.id);
+                    }
+                });
+
+                listEl.appendChild(item);
             });
-            document.getElementById('mixed-count-badge').textContent = `${totalCount} Fragen`;
         }
 
-        function normalizeCitation(str) {
-            return String(str || '').toLowerCase().replace(/\babs(?:atz)?\.?\s*(\d+)/gi, '($1)').replace(/[\s.,\-]+/g, '');
-        }
+        function reorderPdfsLocally(topic, draggedId, targetId) {
+            const listEl = document.getElementById(`pdf-list-${topic}`);
+            const items = Array.from(listEl.children);
+            let currentIds = items.map(el => el.dataset.id).filter(Boolean);
 
-        function isCitationMatch(userInput, expectedSource) {
-            const cleanUser = normalizeCitation(userInput);
-            if (!cleanUser) return false;
-            return [expectedSource, ...expectedSource.split('/')].some(v => normalizeCitation(v) === cleanUser);
-        }
+            const fromIdx = currentIds.indexOf(draggedId);
+            const toIdx = currentIds.indexOf(targetId);
 
-        function buildQuestionFromItem(item, mode, isVollzug = false) {
-            const pool = isVollzug ? vollzugSourcesPool : allSourcesPool;
-            if (mode === 'easy') {
-                const distractors = fisherYatesShuffle(pool.filter(src => src !== item.source)).slice(0, 3);
-                const options = fisherYatesShuffle([{ text: item.source, isCorrect: true }, ...distractors.map(d => ({ text: d, isCorrect: false }))]);
-                return {
-                    type: 'mc',
-                    tag: isVollzug ? "Vollzugsrecht & RDA" : "Rechtsgrundlage gesucht",
-                    questionText: `Frage: ${item.term}`,
-                    options: options,
-                    explanation: `Antwort: ${item.source} — ${item.explanation}`
-                };
-            }
-            return {
-                type: 'freetext',
-                tag: isVollzug ? "Vollzugsrecht & RDA" : "Vorschrift selbst wiedergeben",
-                questionText: `Frage: ${item.term}`,
-                expectedSource: item.source,
-                explanation: `Antwort: ${item.source} — ${item.explanation}`
-            };
-        }
-
-        function startBlockQuiz(blockIndex) {
-            activeQuizOrigin = 'zoll';
-            lastQuizTrigger = () => startBlockQuiz(blockIndex);
-            launchQuiz(zollBlocks[blockIndex].title, fisherYatesShuffle(zollBlocks[blockIndex].items).map(i => buildQuestionFromItem(i, currentMode, false)));
-        }
-
-        function startMixedQuiz() {
-            activeQuizOrigin = 'zoll';
-            lastQuizTrigger = () => startMixedQuiz();
-            launchQuiz("Zollrecht · Alle Themen gemischt", fisherYatesShuffle(zollBlocks.flatMap(b => b.items)).map(i => buildQuestionFromItem(i, currentMode, false)));
-        }
-
-        function startCustomMixedQuiz() {
-            const checked = Array.from(document.querySelectorAll('.custom-topic-cb:checked')).map(cb => Number(cb.value));
-            if (checked.length === 0) return;
-            activeQuizOrigin = 'zoll';
-            lastQuizTrigger = () => startCustomMixedQuiz();
-            launchQuiz(`Zollrecht · Eigene Auswahl (${checked.length} Themen)`, fisherYatesShuffle(checked.flatMap(idx => zollBlocks[idx].items)).map(i => buildQuestionFromItem(i, currentMode, false)));
-        }
-
-        function startVollzugMixedQuiz() {
-            activeQuizOrigin = 'vollzug';
-            lastQuizTrigger = () => startVollzugMixedQuiz();
-            launchQuiz(`Vollzugsrecht & RDA (${vollzugQuizItems.length} Fragen)`, fisherYatesShuffle(vollzugQuizItems).map(i => buildQuestionFromItem(i, currentVollzugMode, true)));
-        }
-
-        function startVollzugRdaQuiz() {
-            activeQuizOrigin = 'vollzug';
-            lastQuizTrigger = () => startVollzugRdaQuiz();
-            launchQuiz(`RDA – Rechtmäßige Dienstausübung`, fisherYatesShuffle(vollzugQuizItems).map(i => buildQuestionFromItem(i, currentVollzugMode, true)));
-        }
-
-        function launchQuiz(title, questions) {
-            activeQuizTitle = title;
-            activeQuizItems = questions;
-            currentIndex = 0;
-            correctCount = 0;
-            wrongAnswersLog = [];
-
-            hideAllViews();
-            document.getElementById('view-quiz').classList.remove('hidden');
-            document.getElementById('quiz-block-title').textContent = title;
-
-            const backBtn = document.getElementById('quiz-back-btn');
-            if (activeQuizOrigin === 'vollzug') {
-                backBtn.onclick = () => openVollzugQuizMenu();
-            } else {
-                backBtn.onclick = () => openZollQuizMenu();
-            }
-
-            const activeMode = activeQuizOrigin === 'vollzug' ? currentVollzugMode : currentMode;
-            const badge = document.getElementById('quiz-mode-badge');
-            if (activeMode === 'hard') {
-                badge.textContent = '🔥 Schwer';
-                badge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0';
-            } else {
-                badge.textContent = '🟢 Einfach';
-                badge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0';
-            }
-
-            renderCurrentQuestion();
-        }
-
-        function renderCurrentQuestion() {
-            answeredCurrent = false;
-            const total = activeQuizItems.length;
-            const q = activeQuizItems[currentIndex];
-
-            document.getElementById('quiz-counter').textContent = `${currentIndex + 1} / ${total}`;
-            document.getElementById('quiz-progress').style.width = `${(currentIndex / total) * 100}%`;
-            document.getElementById('quiz-question-tag').textContent = q.tag;
-            document.getElementById('quiz-question-text').textContent = q.questionText;
-            document.getElementById('feedback-panel').classList.add('hidden');
-
-            const optionsEl = document.getElementById('quiz-options');
-            const textInputArea = document.getElementById('quiz-text-input-area');
-
-            if (q.type === 'freetext') {
-                optionsEl.classList.add('hidden');
-                optionsEl.innerHTML = '';
-                textInputArea.classList.remove('hidden');
-                const inputEl = document.getElementById('free-text-answer');
-                inputEl.value = '';
-                inputEl.disabled = false;
-                document.getElementById('btn-submit-freetext').disabled = false;
-                document.getElementById('btn-submit-freetext').classList.remove('hidden');
-                setTimeout(() => inputEl.focus(), 50);
-            } else {
-                textInputArea.classList.add('hidden');
-                optionsEl.classList.remove('hidden');
-                optionsEl.innerHTML = '';
-                q.options.forEach((opt, idx) => {
-                    const btn = document.createElement('button');
-                    btn.className = "w-full text-left bg-slate-900/95 hover:bg-slate-800 border border-slate-700/80 rounded-2xl p-3.5 flex items-start gap-3 transition-all active:scale-[0.99] shadow-sm";
-                    btn.onclick = () => handleOptionSelect(idx);
-                    btn.innerHTML = `<span class="w-7 h-7 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold text-indigo-300 shrink-0 mt-0.5">${['A','B','C','D'][idx]}</span><span class="text-xs sm:text-sm font-medium text-slate-100">${opt.text}</span>`;
-                    optionsEl.appendChild(btn);
-                });
+            if (fromIdx !== -1 && toIdx !== -1) {
+                currentIds.splice(fromIdx, 1);
+                currentIds.splice(toIdx, 0, draggedId);
+                saveCustomOrder(topic, currentIds);
+                loadOverviewPdfs(topic);
             }
         }
 
-        function handleFreeTextSubmit() {
-            if (answeredCurrent) return;
-            const q = activeQuizItems[currentIndex];
-            const inputEl = document.getElementById('free-text-answer');
-            const val = inputEl.value.trim();
-            if (!val) { inputEl.focus(); return; }
+        async function promptRenamePdf(id, topic, currentName) {
+            const newName = prompt("Neuen Namen für das Dokument eingeben:", currentName);
+            if (!newName || !newName.trim()) return;
 
-            answeredCurrent = true;
-            inputEl.disabled = true;
-            document.getElementById('btn-submit-freetext').disabled = true;
+            await sbClient.from('overview_documents').update({ display_name: newName.trim() }).eq('id', id);
+            loadOverviewPdfs(topic);
+        }
 
-            const isCorrect = isCitationMatch(val, q.expectedSource);
-            if (isCorrect) {
-                correctCount++;
-                inputEl.className = "w-full bg-emerald-500/15 border-2 border-emerald-500 rounded-xl px-3.5 py-3 text-sm font-bold text-emerald-300";
-                playFeedbackTone('correct');
-                showFeedbackBox(true, q.explanation);
-            } else {
-                wrongAnswersLog.push({ questionText: q.questionText, userAnswer: val, correctAnswer: q.expectedSource, explanation: q.explanation });
-                inputEl.className = "w-full bg-rose-500/15 border-2 border-rose-500 rounded-xl px-3.5 py-3 text-sm font-bold text-rose-300";
-                playFeedbackTone('wrong');
-                showFeedbackBox(false, `Richtige Vorschrift: ${q.explanation}`);
+        async function deletePdf(id, topic, displayName) {
+            if (!confirm("Dokument wirklich löschen?")) return;
+            await sbClient.from('overview_documents').delete().eq('id', id);
+            await logActivity('DELETE', displayName);
+            loadOverviewPdfs(topic);
+        }
+
+        // ==================== PDF VIEWER ENGINE ====================
+        let currentPdfDoc = null;
+        let currentPdfPageNum = 1;
+        let currentPdfRenderUrl = '';
+
+        async function openPdfViewer(url, title) {
+            currentPdfRenderUrl = url;
+            currentPdfPageNum = 1;
+            document.getElementById('pdf-viewer-title').textContent = title;
+            document.getElementById('pdf-viewer-modal').classList.remove('hidden');
+            renderPdfPage(url, currentPdfPageNum);
+        }
+
+        async function renderPdfPage(url, num) {
+            try {
+                if (!currentPdfDoc) {
+                    const loadingTask = pdfjsLib.getDocument(url);
+                    currentPdfDoc = await loadingTask.promise;
+                }
+                const page = await currentPdfDoc.getPage(num);
+                const scale = 1.2;
+                const viewport = page.getViewport({ scale });
+
+                const canvas = document.getElementById('pdf-canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                await page.render({ canvasContext: context, viewport: viewport }).promise;
+                document.getElementById('pdf-page-indicator').textContent = `${num} / ${currentPdfDoc.numPages}`;
+            } catch (err) {
+                alert('PDF konnte nicht gerendert werden.');
             }
         }
 
-        function handleOptionSelect(selectedIdx) {
-            if (answeredCurrent) return;
-            answeredCurrent = true;
-            const q = activeQuizItems[currentIndex];
-            const buttons = document.getElementById('quiz-options').children;
-            const chosen = q.options[selectedIdx];
-            const isCorrect = chosen && chosen.isCorrect;
-
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].disabled = true;
-                if (q.options[i].isCorrect) buttons[i].className = "w-full text-left bg-emerald-500/20 border-2 border-emerald-500 rounded-2xl p-3.5 flex items-start gap-3";
-                else if (i === selectedIdx && !isCorrect) buttons[i].className = "w-full text-left bg-rose-500/20 border-2 border-rose-500 rounded-2xl p-3.5 flex items-start gap-3";
-                else buttons[i].classList.add('opacity-45');
-            }
-
-            if (isCorrect) {
-                correctCount++;
-                playFeedbackTone('correct');
-                showFeedbackBox(true, q.explanation);
-            } else {
-                wrongAnswersLog.push({ questionText: q.questionText, userAnswer: chosen ? chosen.text : '', correctAnswer: q.options.find(o => o.isCorrect).text, explanation: q.explanation });
-                playFeedbackTone('wrong');
-                showFeedbackBox(false, q.explanation);
+        function changePdfPage(dir) {
+            if (!currentPdfDoc) return;
+            const newPage = currentPdfPageNum + dir;
+            if (newPage >= 1 && newPage <= currentPdfDoc.numPages) {
+                currentPdfPageNum = newPage;
+                renderPdfPage(currentPdfRenderUrl, currentPdfPageNum);
             }
         }
 
-        function showFeedbackBox(isSuccess, explanationText) {
-            const panel = document.getElementById('feedback-panel');
-            panel.classList.remove('hidden', 'bg-emerald-950/75', 'border-emerald-500/40', 'bg-rose-950/75', 'border-rose-500/40');
-            panel.classList.add(isSuccess ? 'bg-emerald-950/75' : 'bg-rose-950/75', isSuccess ? 'border-emerald-500/40' : 'border-rose-500/40');
-            document.getElementById('feedback-emoji').textContent = isSuccess ? '✅' : '❌';
-            document.getElementById('feedback-heading').textContent = isSuccess ? 'Richtig!' : 'Leider falsch';
-            document.getElementById('feedback-heading').className = `font-bold text-sm ${isSuccess ? 'text-emerald-300' : 'text-rose-300'}`;
-            document.getElementById('feedback-text').textContent = explanationText;
-            document.getElementById('btn-next-question').textContent = currentIndex >= activeQuizItems.length - 1 ? 'Auswertung anzeigen 📊' : 'Nächste Frage →';
-        }
-
-        function nextQuestion() {
-            if (currentIndex >= activeQuizItems.length - 1) showResults();
-            else { currentIndex++; renderCurrentQuestion(); }
-        }
-
-        function showResults() {
-            hideAllViews();
-            document.getElementById('view-result').classList.remove('hidden');
-            const total = activeQuizItems.length;
-            const percent = Math.round((correctCount / total) * 100);
-
-            document.getElementById('result-score-text').textContent = `${correctCount} von ${total} richtig`;
-            document.getElementById('result-percent-text').textContent = `${percent} % Trefferquote`;
-
-            const mistakesContainer = document.getElementById('result-mistakes-container');
-            const mistakesList = document.getElementById('result-mistakes-list');
-            mistakesList.innerHTML = '';
-
-            if (wrongAnswersLog.length > 0) {
-                mistakesContainer.classList.remove('hidden');
-                wrongAnswersLog.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = "bg-rose-950/40 border border-rose-500/30 rounded-2xl p-3.5 text-xs space-y-1.5";
-                    card.innerHTML = `<div class="font-bold text-white">${item.questionText}</div><div class="text-rose-300">Deine Antwort: ${item.userAnswer}</div><div class="text-emerald-300">Richtig: ${item.correctAnswer}</div>`;
-                    mistakesList.appendChild(card);
-                });
-            } else {
-                mistakesContainer.classList.add('hidden');
-            }
+        function closePdfViewer() {
+            document.getElementById('pdf-viewer-modal').classList.add('hidden');
+            currentPdfDoc = null;
         }
     </script>
 </body>
