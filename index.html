@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="de" class="h-full">
 <head>
@@ -696,6 +695,34 @@
 
         window.addEventListener('DOMContentLoaded', checkExistingSession);
 
+        // ==================== PROTOKOLLIERUNGS-FUNKTION (UPLOAD_LOGS) ====================
+        async function logActivity(action, fileName) {
+            try {
+                const userCode = localStorage.getItem('zoll_app_saved_code');
+                let displayName = userCode || 'Unbekannt';
+
+                if (userCode) {
+                    const { data, error } = await sbClient
+                        .from('access_codes')
+                        .select('name')
+                        .eq('code', userCode)
+                        .single();
+
+                    if (!error && data && data.name) {
+                        displayName = data.name;
+                    }
+                }
+
+                await sbClient.from('upload_logs').insert([{
+                    user_email: displayName,
+                    action: action,
+                    file_name: fileName
+                }]);
+            } catch (err) {
+                console.error('Fehler beim Protokollieren:', err);
+            }
+        }
+
         // ==================== PDF UPLOAD & SUPABASE STORAGE LOGIK ====================
         async function handlePdfUpload(topic, inputElement) {
             const file = inputElement.files[0];
@@ -737,6 +764,8 @@
                     alert('Fehler beim Speichern in der Datenbank: ' + dbError.message);
                     return;
                 }
+
+                await logActivity('UPLOAD', file.name);
 
                 inputElement.value = '';
                 loadOverviewPdfs(topic);
@@ -780,7 +809,7 @@
                     </div>
                     <div class="flex items-center gap-1.5 shrink-0">
                         <button onclick="promptRenameDoc('${doc.id}', '${doc.topic}', '${doc.display_name}')" title="Umbenennen" class="w-8 h-8 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white text-xs">✏️</button>
-                        <button onclick="deleteDoc('${doc.id}', '${doc.topic}')" title="Löschen" class="w-8 h-8 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-300 text-xs">🗑️</button>
+                        <button onclick="deleteDoc('${doc.id}', '${doc.topic}', '${doc.display_name}')" title="Löschen" class="w-8 h-8 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-300 text-xs">🗑️</button>
                     </div>
                 `;
                 container.appendChild(item);
@@ -803,7 +832,7 @@
             }
         }
 
-        async function deleteDoc(id, topic) {
+        async function deleteDoc(id, topic, displayName) {
             if (!confirm('Möchtest du dieses Dokument wirklich löschen?')) return;
 
             const { error } = await sbClient
@@ -812,6 +841,7 @@
                 .eq('id', id);
 
             if (!error) {
+                await logActivity('DELETE', displayName);
                 loadOverviewPdfs(topic);
             } else {
                 alert('Fehler beim Löschen.');
