@@ -455,33 +455,6 @@
                 </div>
             </div>
             <div id="pdf-list-zollrecht" class="space-y-2.5 mb-4"></div>
-
-            <!-- Protokoll-Bereich für Uploads & Löschungen -->
-            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl mt-4">
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">📋 Aktivitäts-Protokoll</h3>
-                    <button onclick="loadActivityLogs()" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-700 transition">
-                        Aktualisieren 🔄
-                    </button>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-xs text-left text-slate-300">
-                        <thead>
-                            <tr class="border-b border-slate-800 text-slate-400">
-                                <th class="pb-2">Zeitpunkt</th>
-                                <th class="pb-2">Name</th>
-                                <th class="pb-2">Aktion</th>
-                                <th class="pb-2">Dateiname</th>
-                            </tr>
-                        </thead>
-                        <tbody id="activity-log-body">
-                            <tr>
-                                <td colspan="4" class="py-3 text-center text-slate-500 italic">Lade Protokoll...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </section>
 
         <!-- ==================== ANSICHT 3: AKTIVES QUIZ ==================== -->
@@ -634,7 +607,6 @@
             loadOverviewPdfs('rss');
             loadOverviewPdfs('vollzug');
             loadOverviewPdfs('zollrecht');
-            loadActivityLogs();
         }
 
         function showAuthError(msg) {
@@ -723,68 +695,6 @@
 
         window.addEventListener('DOMContentLoaded', checkExistingSession);
 
-        // ==================== PROTOKOLLIERUNGS-FUNKTION (UPLOAD_LOGS) ====================
-        async function logActivity(action, fileName) {
-            try {
-                const userCode = localStorage.getItem('zoll_app_saved_code');
-                let displayName = userCode || 'Unbekannt';
-
-                if (userCode) {
-                    const { data, error } = await sbClient
-                        .from('access_codes')
-                        .select('name')
-                        .eq('code', userCode)
-                        .single();
-
-                    if (!error && data && data.name) {
-                        displayName = data.name;
-                    }
-                }
-
-                await sbClient.from('upload_logs').insert([{
-                    user_email: displayName,
-                    action: action,
-                    file_name: fileName
-                }]);
-                loadActivityLogs();
-            } catch (err) {
-                console.error('Fehler beim Protokollieren:', err);
-            }
-        }
-
-        async function loadActivityLogs() {
-            const tbody = document.getElementById('activity-log-body');
-            if (!tbody) return;
-
-            const { data, error } = await sbClient
-                .from('upload_logs')
-                .select('*')
-                .order('created_at', { ascending: false })
-                .limit(10);
-
-            if (error || !data || data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="py-3 text-center text-slate-500 italic">Noch keine Aktivitäten protokolliert.</td></tr>`;
-                return;
-            }
-
-            tbody.innerHTML = '';
-            data.forEach(log => {
-                const dateStr = new Date(log.created_at).toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' });
-                const actionBadge = log.action === 'UPLOAD' 
-                    ? `<span class="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-md font-bold text-[10px]">UPLOAD</span>` 
-                    : `<span class="bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded-md font-bold text-[10px]">LÖSCHUNG</span>`;
-
-                tbody.innerHTML += `
-                    <tr class="border-b border-slate-800/60">
-                        <td class="py-2.5 text-slate-400">${dateStr}</td>
-                        <td class="py-2.5 font-bold text-white">${log.user_email || 'Unbekannt'}</td>
-                        <td class="py-2.5">${actionBadge}</td>
-                        <td class="py-2.5 font-medium text-white truncate max-w-[150px]">${log.file_name}</td>
-                    </tr>
-                `;
-            });
-        }
-
         // ==================== PDF UPLOAD & SUPABASE STORAGE LOGIK ====================
         async function handlePdfUpload(topic, inputElement) {
             const file = inputElement.files[0];
@@ -826,9 +736,6 @@
                     alert('Fehler beim Speichern in der Datenbank: ' + dbError.message);
                     return;
                 }
-
-                // Aktivität protokollieren
-                await logActivity('UPLOAD', file.name);
 
                 inputElement.value = '';
                 loadOverviewPdfs(topic);
@@ -872,7 +779,7 @@
                     </div>
                     <div class="flex items-center gap-1.5 shrink-0">
                         <button onclick="promptRenameDoc('${doc.id}', '${doc.topic}', '${doc.display_name}')" title="Umbenennen" class="w-8 h-8 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white text-xs">✏️</button>
-                        <button onclick="deleteDoc('${doc.id}', '${doc.topic}', '${doc.display_name}')" title="Löschen" class="w-8 h-8 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-300 text-xs">🗑️</button>
+                        <button onclick="deleteDoc('${doc.id}', '${doc.topic}')" title="Löschen" class="w-8 h-8 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-300 text-xs">🗑️</button>
                     </div>
                 `;
                 container.appendChild(item);
@@ -895,7 +802,7 @@
             }
         }
 
-        async function deleteDoc(id, topic, displayName) {
+        async function deleteDoc(id, topic) {
             if (!confirm('Möchtest du dieses Dokument wirklich löschen?')) return;
 
             const { error } = await sbClient
@@ -904,8 +811,6 @@
                 .eq('id', id);
 
             if (!error) {
-                // Aktivität protokollieren
-                await logActivity('DELETE', displayName);
                 loadOverviewPdfs(topic);
             } else {
                 alert('Fehler beim Löschen.');
@@ -1122,7 +1027,6 @@
             hideAllViews();
             document.getElementById('view-zollrecht-overview').classList.remove('hidden');
             loadOverviewPdfs('zollrecht');
-            loadActivityLogs();
         }
 
         function toggleOverviewPanel(contentId, chevronId) {
