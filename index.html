@@ -142,6 +142,23 @@
                     </div>
                     <span class="text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
                 </button>
+
+                <!-- NEU: Gesetz-Bibliothek & XML-Importer auf der Startseite -->
+                <button onclick="openMainTopic('gesetze')"
+                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-2xl shrink-0">
+                            📜
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-lg text-white group-hover:text-amber-300 transition">
+                                Gesetz-Bibliothek &amp; XML-Importer
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Gesetze hochladen &amp; dauerhaft in Supabase speichern</p>
+                        </div>
+                    </div>
+                    <span class="text-slate-500 group-hover:text-amber-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
+                </button>
             </div>
         </main>
 
@@ -335,7 +352,7 @@
             <div id="pdf-list-vollzug" class="space-y-2.5 mb-4"></div>
         </section>
 
-        <!-- ==================== ANSICHT 2: ZOLLRECHT (QUIZ & ÜBERSICHT) ==================== -->
+        <!-- ==================== ANSICHT 3: ZOLLRECHT MENÜ ==================== -->
         <section id="view-zollrecht" class="hidden flex-1 flex flex-col pb-8 animate-view">
             <div class="flex items-center justify-between mb-6">
                 <button onclick="goHome()"
@@ -380,7 +397,7 @@
             </div>
         </section>
 
-        <!-- ==================== ANSICHT 2B: ZOLLRECHT -> QUIZ ==================== -->
+        <!-- ==================== ANSICHT 3B: ZOLLRECHT -> QUIZ ==================== -->
         <section id="view-zollrecht-quiz" class="hidden flex-1 flex flex-col pb-8 animate-view">
             <div class="flex items-center justify-between mb-4">
                 <button onclick="backToZollrecht()"
@@ -435,7 +452,7 @@
             <div id="blocks-container" class="space-y-2.5"></div>
         </section>
 
-        <!-- ==================== ANSICHT 2C: ZOLLRECHT -> ÜBERSICHT ==================== -->
+        <!-- ==================== ANSICHT 3C: ZOLLRECHT -> ÜBERSICHT ==================== -->
         <section id="view-zollrecht-overview" class="hidden flex-1 flex flex-col pb-8 animate-view">
             <div class="flex items-center justify-between mb-5">
                 <button onclick="backToZollrecht()"
@@ -457,7 +474,65 @@
             <div id="pdf-list-zollrecht" class="space-y-2.5 mb-4"></div>
         </section>
 
-        <!-- ==================== ANSICHT 3: AKTIVES QUIZ ==================== -->
+        <!-- ==================== ANSICHT 4: GESETZ-BIBLIOTHEK & XML-IMPORTER ==================== -->
+        <section id="view-gesetze" class="hidden flex-1 flex flex-col pb-8 animate-view">
+            <div class="flex items-center justify-between mb-5">
+                <button onclick="goHome()"
+                    class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
+                    ← Startseite
+                </button>
+                <span class="text-sm font-extrabold text-amber-300 tracking-tight">Gesetz-Bibliothek</span>
+            </div>
+
+            <!-- Upload & Import Box -->
+            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-5 mb-5 shadow-xl space-y-4">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">XML-Gesetz von gesetze-im-internet.de importieren</h3>
+                
+                <div class="flex flex-col gap-3">
+                    <label for="law-xml-input" class="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-slate-700 hover:border-amber-500 rounded-xl cursor-pointer bg-slate-950 hover:bg-slate-900 transition p-4 text-center">
+                        <span class="text-2xl mb-1">📂</span>
+                        <span class="text-xs font-semibold text-slate-200">XML-Datei auswählen oder hierher ziehen</span>
+                        <span class="text-[10px] text-slate-500 mt-0.5">ZollVG oder andere Juris-XMLs</span>
+                        <input id="law-xml-input" type="file" accept=".xml,text/xml" class="hidden" onchange="handleLawXmlUpload(this)">
+                    </label>
+
+                    <div id="import-preview-box" class="hidden space-y-3 pt-2">
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 text-xs space-y-1">
+                            <div class="font-bold text-amber-300" id="import-law-title">Gesetzestitel</div>
+                            <div class="text-slate-400" id="import-law-meta">0 Paragrafen erkannt</div>
+                        </div>
+                        <button onclick="saveImportedLawToSupabase()"
+                            class="w-full py-3 rounded-xl font-bold text-xs bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-lg active:scale-[0.99] transition">
+                            💾 Dauerhaft in Supabase speichern
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Such- und Auswahlbox für bereits gespeicherte Gesetze -->
+            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Gesetze durchsuchen</h3>
+                    <button onclick="loadLawsFromSupabase()" class="text-[11px] text-amber-400 hover:underline">🔄 Aktualisieren</button>
+                </div>
+
+                <div class="space-y-3">
+                    <select id="select-law-abk" onchange="onLawSelectionChange()" class="w-full bg-slate-950 border border-slate-700 text-white text-xs rounded-xl px-3.5 py-3 focus:outline-none focus:border-amber-500">
+                        <option value="">-- Gesetz aus Supabase wählen --</option>
+                    </select>
+
+                    <div class="relative">
+                        <input id="law-search-input" type="text" placeholder="Suche nach Paragraf (§ 10), Absatz (Abs. 1) oder Begriff..." oninput="filterStoredLaws()"
+                            class="w-full bg-slate-950 border border-slate-700 focus:border-amber-500 focus:outline-none rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 transition">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Anzeige der Gesetze -->
+            <div id="stored-laws-container" class="space-y-3 mt-4"></div>
+        </section>
+
+        <!-- ==================== ANSICHT 5: AKTIVES QUIZ ==================== -->
         <section id="view-quiz" class="hidden flex-1 flex flex-col justify-between pb-6 animate-view">
             <div>
                 <div class="flex items-center justify-between gap-2 mb-3">
@@ -519,7 +594,7 @@
             </div>
         </section>
 
-        <!-- ==================== ANSICHT 4: AUSWERTUNG ==================== -->
+        <!-- ==================== ANSICHT 6: AUSWERTUNG ==================== -->
         <section id="view-result" class="hidden flex-1 flex flex-col items-center justify-center pb-8 animate-view">
             <div class="w-full bg-slate-900/95 border border-slate-800 rounded-3xl p-6 text-center shadow-2xl">
                 <div id="result-emoji" class="text-5xl mb-3">🏆</div>
@@ -578,6 +653,10 @@
         let vollzugQuizItems = [];
         let allSourcesPool = [];
         let vollzugSourcesPool = [];
+
+        // Globale Variablen für den XML-Importer & Supabase-Gesetze (sauber & einmalig deklariert)
+        let stagedLawData = null;
+        let loadedDbNorms = [];
 
         function getOrCreateDeviceId() {
             let devId = localStorage.getItem('zoll_app_device_id');
@@ -960,6 +1039,7 @@
             document.getElementById('view-zollrecht').classList.add('hidden');
             document.getElementById('view-zollrecht-quiz').classList.add('hidden');
             document.getElementById('view-zollrecht-overview').classList.add('hidden');
+            document.getElementById('view-gesetze').classList.add('hidden');
             document.getElementById('view-quiz').classList.add('hidden');
             document.getElementById('view-result').classList.add('hidden');
         }
@@ -977,7 +1057,195 @@
                 document.getElementById('view-vollzug').classList.remove('hidden');
             } else if (topicKey === 'zollrecht') {
                 document.getElementById('view-zollrecht').classList.remove('hidden');
+            } else if (topicKey === 'gesetze') {
+                document.getElementById('view-gesetze').classList.remove('hidden');
+                loadLawsFromSupabase();
             }
+        }
+
+        // ==================== XML IMPORTER & SUPABASE SPEICHERUNG ====================
+        function handleLawXmlUpload(inputElement) {
+            const file = inputElement.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    stagedLawData = parseGesetzeImInternetXmlToDb(e.target.result, file.name);
+                    document.getElementById('import-law-title').textContent = `${stagedLawData.fullTitle} (${stagedLawData.abbreviation})`;
+                    document.getElementById('import-law-meta').textContent = `${stagedLawData.norms.length} Paragrafen erfolgreich geparst und bereit zum Speichern.`;
+                    document.getElementById('import-preview-box').classList.remove('hidden');
+                } catch (err) {
+                    alert('Fehler beim Parsen der XML: ' + err.message);
+                }
+            };
+            reader.readAsText(file, 'UTF-8');
+        }
+
+        function parseGesetzeImInternetXmlToDb(xmlString, fileName) {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+            const normElements = xmlDoc.querySelectorAll('norm');
+            if (normElements.length === 0) throw new Error('Keine <norm>-Tags gefunden.');
+
+            let lawAbk = '', lawTitle = '';
+            const norms = [];
+
+            normElements.forEach((norm, index) => {
+                const metadaten = norm.querySelector('metadaten');
+                const textdaten = norm.querySelector('textdaten');
+
+                if (index === 0 && metadaten) {
+                    lawAbk = (metadaten.querySelector('amtabk, jurabk')?.textContent || fileName).trim();
+                    lawTitle = (metadaten.querySelector('langue')?.textContent || 'Gesetz').trim();
+                }
+
+                const enbez = metadaten?.querySelector('enbez')?.textContent.trim() || '';
+                const titel = metadaten?.querySelector('titel')?.textContent.trim() || '';
+                const contentNode = textdaten?.querySelector('text Content') || textdaten?.querySelector('text');
+                
+                let plainText = '';
+                if (contentNode) {
+                    plainText = contentNode.textContent.replace(/\s+/g, ' ').trim();
+                }
+
+                if (enbez || plainText) {
+                    norms.push({
+                        abkuerzung: lawAbk,
+                        gesetz_titel: lawTitle,
+                        paragraf: enbez,
+                        titel: titel,
+                        inhalt: plainText
+                    });
+                }
+            });
+
+            return { abbreviation: lawAbk, fullTitle: lawTitle, norms };
+        }
+
+        async function saveImportedLawToSupabase() {
+            if (!stagedLawData || !stagedLawData.norms.length) return;
+
+            try {
+                const { error } = await sbClient
+                    .from('gesetze_paragrafen')
+                    .upsert(stagedLawData.norms, { onConflict: ['abkuerzung', 'paragraf'] });
+
+                if (error) throw error;
+
+                alert(`Erfolgreich! ${stagedLawData.norms.length} Paragrafen von "${stagedLawData.abbreviation}" wurden in Supabase gespeichert.`);
+                document.getElementById('import-preview-box').classList.add('hidden');
+                document.getElementById('law-xml-input').value = '';
+                loadLawsFromSupabase();
+            } catch (err) {
+                alert('Fehler beim Speichern in Supabase: ' + err.message);
+            }
+        }
+
+        async function loadLawsFromSupabase() {
+            const selectEl = document.getElementById('select-law-abk');
+            selectEl.innerHTML = '<option value="">Lade Gesetze aus Supabase...</option>';
+
+            const { data, error } = await sbClient
+                .from('gesetze_paragrafen')
+                .select('abkuerzung, gesetz_titel')
+                .order('abkuerzung');
+
+            if (error || !data) {
+                selectEl.innerHTML = '<option value="">Fehler beim Laden der Gesetze</option>';
+                return;
+            }
+
+            const uniqueLaws = [];
+            const seen = new Set();
+            data.forEach(row => {
+                if (!seen.has(row.abkuerzung)) {
+                    seen.add(row.abkuerzung);
+                    uniqueLaws.push(row);
+                }
+            });
+
+            selectEl.innerHTML = '<option value="">-- Wähle ein gespeichertes Gesetz --</option>';
+            uniqueLaws.forEach(law => {
+                const opt = document.createElement('option');
+                opt.value = law.abkuerzung;
+                opt.textContent = `${law.abkuerzung} – ${law.gesetz_titel}`;
+                selectEl.appendChild(opt);
+            });
+        }
+
+        async function onLawSelectionChange() {
+            const abk = document.getElementById('select-law-abk').value;
+            if (!abk) {
+                loadedDbNorms = [];
+                document.getElementById('stored-laws-container').innerHTML = '';
+                return;
+            }
+
+            const { data, error } = await sbClient
+                .from('gesetze_paragrafen')
+                .select('*')
+                .eq('abkuerzung', abk)
+                .order('id');
+
+            if (error || !data) return;
+
+            loadedDbNorms = data;
+            renderStoredLaws(loadedDbNorms);
+        }
+
+        function filterStoredLaws() {
+            const query = document.getElementById('law-search-input').value.toLowerCase().trim();
+            if (!loadedDbNorms.length) return;
+
+            if (!query) {
+                renderStoredLaws(loadedDbNorms);
+                return;
+            }
+
+            let normalizedQuery = query.replace(/\babs(?:atz)?\.?\s*(\d+)\b/g, '($1)');
+            const filtered = loadedDbNorms.filter(norm => {
+                const searchStr = `${norm.paragraf} ${norm.titel} ${norm.inhalt}`.toLowerCase();
+                const queryNum = normalizedQuery.replace(/[§\s]/g, '');
+                const paraNum = norm.paragraf.toLowerCase().replace(/[§\s]/g, '');
+
+                if (/^\d+[a-z]?$/.test(queryNum)) {
+                    return paraNum === queryNum || paraNum === `${queryNum}a` || paraNum === `${queryNum}b`;
+                }
+
+                return searchStr.includes(normalizedQuery);
+            });
+
+            renderStoredLaws(filtered);
+        }
+
+        function renderStoredLaws(norms) {
+            const container = document.getElementById('stored-laws-container');
+            container.innerHTML = '';
+
+            if (norms.length === 0) {
+                container.innerHTML = '<div class="bg-slate-900 p-5 rounded-2xl text-center text-xs text-slate-400 border border-slate-800">Keine passenden Paragrafen gefunden.</div>';
+                return;
+            }
+
+            const fragment = document.createDocumentFragment();
+            norms.forEach(norm => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-md space-y-2";
+                
+                let formattedText = (norm.inhalt || '').replace(/(\(\d+\))/g, '<br><strong class="text-amber-400">$1</strong>');
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                        <span class="px-2.5 py-1 bg-amber-500/15 text-amber-300 font-bold text-xs rounded-lg border border-amber-500/30">${norm.paragraf}</span>
+                        <span class="text-[10px] font-semibold text-slate-400 uppercase">${norm.abkuerzung}</span>
+                    </div>
+                    ${norm.titel ? `<h4 class="font-bold text-sm text-white">${norm.titel}</h4>` : ''}
+                    <div class="text-xs text-slate-300 leading-relaxed whitespace-pre-line">${formattedText}</div>
+                `;
+                fragment.appendChild(card);
+            });
+            container.appendChild(fragment);
         }
 
         function backToRss() {
