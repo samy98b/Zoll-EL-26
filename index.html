@@ -469,13 +469,14 @@
                         <thead>
                             <tr class="border-b border-slate-800 text-slate-400">
                                 <th class="pb-2">Zeitpunkt</th>
+                                <th class="pb-2">Name</th>
                                 <th class="pb-2">Aktion</th>
                                 <th class="pb-2">Dateiname</th>
                             </tr>
                         </thead>
                         <tbody id="activity-log-body">
                             <tr>
-                                <td colspan="3" class="py-3 text-center text-slate-500 italic">Lade Protokoll...</td>
+                                <td colspan="4" class="py-3 text-center text-slate-500 italic">Lade Protokoll...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -725,9 +726,23 @@
         // ==================== PROTOKOLLIERUNGS-FUNKTION (UPLOAD_LOGS) ====================
         async function logActivity(action, fileName) {
             try {
-                const userCode = localStorage.getItem('zoll_app_saved_code') || 'Unbekannt';
+                const userCode = localStorage.getItem('zoll_app_saved_code');
+                let displayName = userCode || 'Unbekannt';
+
+                if (userCode) {
+                    const { data, error } = await sbClient
+                        .from('access_codes')
+                        .select('name')
+                        .eq('code', userCode)
+                        .single();
+
+                    if (!error && data && data.name) {
+                        displayName = data.name;
+                    }
+                }
+
                 await sbClient.from('upload_logs').insert([{
-                    user_email: userCode,
+                    user_email: displayName,
                     action: action,
                     file_name: fileName
                 }]);
@@ -748,7 +763,7 @@
                 .limit(10);
 
             if (error || !data || data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" class="py-3 text-center text-slate-500 italic">Noch keine Aktivitäten protokolliert.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" class="py-3 text-center text-slate-500 italic">Noch keine Aktivitäten protokolliert.</td></tr>`;
                 return;
             }
 
@@ -762,6 +777,7 @@
                 tbody.innerHTML += `
                     <tr class="border-b border-slate-800/60">
                         <td class="py-2.5 text-slate-400">${dateStr}</td>
+                        <td class="py-2.5 font-bold text-white">${log.user_email || 'Unbekannt'}</td>
                         <td class="py-2.5">${actionBadge}</td>
                         <td class="py-2.5 font-medium text-white truncate max-w-[150px]">${log.file_name}</td>
                     </tr>
