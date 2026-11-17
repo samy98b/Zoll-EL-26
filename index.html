@@ -458,7 +458,12 @@
 
             <!-- Protokoll-Bereich für Uploads & Löschungen -->
             <div class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl mt-4">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">📋 Aktivitäts-Protokoll (Uploads &amp; Löschungen)</h3>
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">📋 Aktivitäts-Protokoll</h3>
+                    <button onclick="loadActivityLogs()" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-700 transition">
+                        Aktualisieren 🔄
+                    </button>
+                </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs text-left text-slate-300">
                         <thead>
@@ -1407,7 +1412,7 @@
                 wrongAnswersLog.forEach(item => {
                     const card = document.createElement('div');
                     card.className = "bg-rose-950/40 border border-rose-500/30 rounded-2xl p-3.5 text-xs space-y-1.5";
-                    card.innerHTML = `<div class="font-bold text-white">${item.questionTest}</div><div class="text-rose-300">Deine Antwort: ${item.userAnswer}</div><div class="text-emerald-300">Richtig: ${item.correctAnswer}</div>`;
+                    card.innerHTML = `<div class="font-bold text-white">${item.questionText}</div><div class="text-rose-300">Deine Antwort: ${item.userAnswer}</div><div class="text-emerald-300">Richtig: ${item.correctAnswer}</div>`;
                     mistakesList.appendChild(card);
                 });
             } else {
