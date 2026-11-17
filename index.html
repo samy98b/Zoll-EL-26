@@ -201,16 +201,73 @@
 <!-- ... existing code ... -->
         <!-- ==================== ANSICHT 2: ZOLLRECHT (QUIZ & ÜBERSICHT) ==================== -->
         <section id="view-zollrecht" class="hidden flex-1 flex flex-col pb-8 animate-view">
-<!-- ... existing code ... -->
-            <div id="pdf-list-zollrecht" class="space-y-2.5 mb-4"></div>
-        </section>
-
-        <!-- ==================== NEUE ANSICHT: GESETZ-BIBLIOTHEK & XML-IMPORTER ==================== -->
-        <section id="view-gesetze" class="hidden flex-1 flex flex-col pb-8 animate-view">
-            <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center justify-between mb-6">
                 <button onclick="goHome()"
                     class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
                     ← Startseite
+                </button>
+                <span class="text-sm font-extrabold text-indigo-300 tracking-tight">Zollrecht</span>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-center space-y-4 pb-10">
+                <button onclick="openZollQuizMenu()"
+                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-indigo-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-2xl shrink-0">
+                            🧠
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-lg text-white group-hover:text-indigo-300 transition">
+                                Quiz
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Schwierigkeitsgrad, Themen mischen &amp; Einzelthemen</p>
+                        </div>
+                    </div>
+                    <span class="text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
+                </button>
+
+                <button onclick="openZollOverviewMenu()"
+                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-2xl shrink-0">
+                            📚
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-lg text-white group-hover:text-emerald-300 transition">
+                                Übersicht
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Zollverfahren, Rechtsgrundlagen &amp; PDFs</p>
+                        </div>
+                    </div>
+                    <span class="text-slate-500 group-hover:text-emerald-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
+                </button>
+
+                <!-- NEU: Gesetz-Bibliothek unter Zollrecht -->
+                <button onclick="openMainTopic('gesetze')"
+                    class="w-full text-left group bg-slate-900/90 hover:bg-slate-800/95 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-xl transition-all duration-200 active:scale-[0.99] flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-2xl shrink-0">
+                            📜
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-lg text-white group-hover:text-amber-300 transition">
+                                Gesetz-Bibliothek &amp; XML-Importer
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Gesetze hochladen &amp; dauerhaft in Supabase speichern</p>
+                        </div>
+                    </div>
+                    <span class="text-slate-500 group-hover:text-amber-300 group-hover:translate-x-1 transition text-xl font-bold">→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== ANSICHT 2B: ZOLLRECHT -> QUIZ ==================== -->
+        <!-- ==================== NEUE ANSICHT: GESETZ-BIBLIOTHEK & XML-IMPORTER ==================== -->
+        <section id="view-gesetze" class="hidden flex-1 flex flex-col pb-8 animate-view">
+            <div class="flex items-center justify-between mb-5">
+                <button onclick="openMainTopic('zollrecht')"
+                    class="text-xs font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/70 active:scale-95 transition">
+                    ← Zollrecht
                 </button>
                 <span class="text-sm font-extrabold text-amber-300 tracking-tight">Gesetz-Bibliothek</span>
             </div>
